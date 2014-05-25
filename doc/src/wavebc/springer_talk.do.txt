@@ -1,0 +1,135 @@
+TITLE: Demands and Wishes for Future Scientific Publishing
+AUTHOR: Hans Petter Langtangen at Simula Research Laboratory
+DATE: Today
+
+!split
+======= Book publishing will probably survive =======
+
+FIGURE: [fig/oldbooks, width=800]
+
+!split
+======= ...but new media calls for new publishing technology =======
+
+!bslidecell 00 0.4
+FIGURE: [fig/ipad, width=400 frac=0.8]
+
+FIGURE: [fig/iphones, width=100 frac=0.3]
+
+#FIGURE: [fig/mbair, width=400]
+
+!eslidecell
+
+!bslidecell 01 0.6
+FIGURE: [fig/imac, width=350 frac=0.7]
+!eslidecell
+
+!split
+======= Modern publishing has a jungle of venues =======
+
+!bblock Classical publishing venues
+books, journals, conference proceedings, local compendia
+!eblock
+
+!bpop
+!bblock Modern publishing venues
+ * books, journals, proceedings
+ * blog posts
+ * project websites at, e.g., "GitHub": "http://github.com", "Bitbucket": "https://bitbucket.org/", "Figshare": "http://figshare.com/", "Zenodo": "http://zenodo.org/" (w/DOI)
+ * document sharing sites at, e.g., Google docs, "Draft": "https://draftin.com/", "stackedit.io": "https://stackedit.io/" (limited math/code support)
+ * (Dropbox, Google Drive)
+ * promotion through Google+, Facebook, Twitter, LinkedIn, ...
+!eblock
+!epop
+
+!bpop
+!bblock
+Publishers have full control of classical venues and no control
+of the new venues. *How to increase the influence*?
+!eblock
+!epop
+
+!split
+======= Modern publishing formats are of four types =======
+
+!bpop
+!bblock Formats:
+ o PDF
+ o HTML
+ o Special e-book formats: epub, mobi, ...
+ o Interactive notebooks
+!eblock
+
+!bblock How to generate:
+ o PDF: LaTeX
+ o HTML: many tools (Sphinx, Markdown, ... - not LaTeX)
+ o e-book formats: from PDF via "Calibre": "http://calibre-ebook.com/"
+ o Interactive notebooks: IPython notebook, Mathematica, ...
+!eblock
+
+!bwarning Our special requirement:
+The format and the generating tool must have strong support for
+mathematics and computer code.
+!ewarning
+!eblock
+
+!split
+======= PDF is for paper, HTML for the screen =======
+
+!bslidecell 00 0.6
+
+!bblock
+My assertion: PDF works on screens, but HTML is more appealing
+and has much more functionality.
+!eblock
+!eslidecell
+
+!bslidecell 01 0.4
+FIGURE: [fig/ipad, width=400 frac=0.8]
+
+FIGURE: [fig/iphones, width=100 frac=0.3]
+
+#FIGURE: [fig/mbair, width=400]
+
+!eslidecell
+
+
+!split
+======= I use a generalized format to write my books (and everything else) =======
+
+ * LaTeX is the dec facto standard format for math and code
+ * Conversion tools from LaTeX to HTML do not work well
+ * Write in a simpler format that easily converts to whatever
+   * "Doconce": "http://hplgit.github.io/doconce/doc/web/index.html"
+   * "Markdown": "http://daringfireball.net/projects/markdown/"
+   * "Sphinx": "http://sphinx-doc.org/"
+   * "IPython notebooks": "http://ipython.org/notebook.html"
+   * Google Docs
+
+!split
+======= My scientific writings are converted to several formats =======
+
+ * "Doconce source code": "_static/wavebc.do.txt.html"
+ * "PDF for printing": "_static/wavebc_4print.pdf"
+ * "PDF for screen": "_static/wavebc.pdf"
+ * "HTML Sphinx CBC": "_static/sphinx-cbc/._wavebc001.html"
+ * "HTML Sphinx FEniCS": "_static/sphinx-fenics_minimal/._wavebc001.html"
+ * "HTML solarized": "_static/._wavebc_solarized002.html#sec:math:pde"
+ * "HTML Bootstrap 1": "_static/wavebc_journal.html"
+ * "HTML Bootstrap 2": "_static/wavebc_cyborg.html"
+ * IPython notebook
+ * BLOG POST Google!!!!
+
+In addition, I produce slides (brief *study guides*) in the same formats.
+
+!bnotice Note
+HTML versions often have additional functionality (movies, embedded services,
+quiz/survey).
+!enotice
+
+!split
+======= Wishlist =======
+
+ * Springer prints books and make e-books as usual
+ * color{red}{Springer or I publishes alternative formats}
+ * We publish HTML-based formats at professional project sites (GitHub, Zenodo, Figshare, ...)
+ * color{red}{Springer should demand a ``watermark'' on all derived versions of material appearing in a book}
