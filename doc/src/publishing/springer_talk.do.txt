@@ -1,3 +1,6 @@
+# 2DO: fenics book repo agreement
+# when I google and find something interesting coming from a book - I often want to buy the book, but where is it?
+
 TITLE: Demands and Wishes for Future Scientific Publishing
 AUTHOR: Hans Petter Langtangen at Simula Research Laboratory
 DATE: Today
@@ -5,7 +8,7 @@ DATE: Today
 !split
 ===== The book will survive =====
 
-FIGURE: [fig/oldbooks, width=800]
+FIGURE: [fig/oldbooks, width=700]
 
 !split
 ===== ...but new media calls for new publishing technology =====
@@ -35,7 +38,7 @@ books, journals, conference proceedings, local compendia
  * books, journals, proceedings (need publisher)
  * blog posts
  * project websites at "GitHub": "http://github.com", "Bitbucket": "https://bitbucket.org/", "Figshare": "http://figshare.com/", "Zenodo": "http://zenodo.org/" (w/DOI), ...
- * document sharing sites at "latex-lab": "http://docs.latexlab.org/docs", "Google docs": "http://en.wikipedia.org/wiki/Google_Docsl", "Draft": "https://draftin.com/", "stackedit.io": "https://stackedit.io/", ...
+ * (document sharing sites at "latex-lab": "http://docs.latexlab.org/docs", "Google docs": "http://en.wikipedia.org/wiki/Google_Docsl", "Draft": "https://draftin.com/", "stackedit.io": "https://stackedit.io/", ...)
  * (Dropbox, Google Drive)
  * promotion through Twitter, Google+, Facebook, ...
 !eblock
@@ -46,25 +49,15 @@ books, journals, conference proceedings, local compendia
 !split
 ===== New venues also offer new publishing formats =====
 
-Formats:
+ o _PDF_ (via LaTeX)
+ o _HTML_ (via plain text, Sphinx, Markdown, Doconce, ... - not LaTeX)
+ o Special e-book formats: _epub_, _mobi_, ... (PDF via "Calibre": "http://calibre-ebook.com/")
+ o Interactive _notebooks_ (via IPython notebook, Sage, Mathematica, ...)
+ o iBooks (via Apple's app)
 
- o PDF
- o HTML
- o Special e-book formats: epub, mobi, ...
- o Interactive notebooks
- o iBooks
-
-How to generate:
-
- o PDF: LaTeX
- o HTML: many tools (Sphinx, Markdown, Doconce, ... - not LaTeX)
- o e-book formats: from PDF via "Calibre": "http://calibre-ebook.com/"
- o Interactive notebooks: IPython notebook, Mathematica, ...
- o iBooks: Apple-specific interactive tool
 
 !bwarning Our special requirement:
-The format and the generating tool must have strong support for
-mathematics and computer code.
+*Strong support for mathematics and computer code!*
 !ewarning
 
 !split
@@ -72,7 +65,7 @@ mathematics and computer code.
 
 !bslidecell 00 0.6
 
-!bblock My assertion
+!bblock My assertion:
 PDF works on screens, but HTML is more appealing
 and has much more functionality.
 !eblock
@@ -89,12 +82,14 @@ FIGURE: [fig/iphones, width=150 frac=0.3]
 
 
 !split
-===== Use generalized formats to write scientific material =====
+===== My conclusion: use generalized formats to write scientific material =====
 
+!bpop
  * LaTeX has been the de facto standard format
  * Conversion tools from LaTeX to HTML do not work well
  * Solution: write in a more *primitive format* that easily *converts* to LaTeX, HTML, and whatever
    * "Doconce": "http://hplgit.github.io/doconce/doc/web/index.html", "Markdown": "http://daringfireball.net/projects/markdown/", "Sphinx": "http://sphinx-doc.org/", "IPython notebooks": "http://ipython.org/notebook.html", (Google Docs)
+!epop
 
 !bpop
 !bwarning
@@ -102,6 +97,10 @@ LaTeX (paper) and HTML (screen) apply different typography. Writing in a
 simpler common format is different from classical LaTeX writing.
 !ewarning
 !epop
+
+# Example: Floating elements: only figures can be floating,
+# algorithms, tables, etc. must be inlineed at fixed locations
+# in the running text.
 
 !split
 ===== My scientific writings are converted to several formats =====
@@ -113,8 +112,8 @@ dir = '../wavebc/_static'
  * "Doconce source code": "${dir}/wavebc.do.txt.html"
  * "PDF for printing": "${dir}/wavebc_4print.pdf"
  * "PDF for screen": "${dir}/wavebc.pdf"
- * "HTML Sphinx CBC": "${dir}/sphinx-cbc/._wavebc001.html"
- * "HTML Sphinx FEniCS": "${dir}/sphinx-fenics_minimal/._wavebc001.html"
+ * "HTML Sphinx CBC": "${dir}/sphinx-cbc/_build/html/._wavebc001.html"
+ * "HTML Sphinx FEniCS": "${dir}/sphinx-fenics_minimal/_built/html/._wavebc001.html"
  * "HTML solarized": "${dir}/._wavebc_solarized002.html#sec:math:pde"
  * "HTML Bootstrap 1": "${dir}/wavebc_journal.html"
  * "HTML Bootstrap 2": "${dir}/wavebc_cyborg.html"
@@ -126,12 +125,13 @@ multiple-choice tests).
 !enotice
 
 !split
-===== Wishlist part 1 =====
+===== Wishlist (part 1) =====
 
- * Springer prints books and make e-books as usual
- * color{red}{Alternative formats can be published}
-   (Springer, GitHub, Zenodo, Figshare, ...)
- * color{red}{Springer demands a ``watermark'' on all derived versions of material appearing in a book}
+ * Alternative formats of a book can be published
+   (at Springer, GitHub, Zenodo, Figshare, ...)
+ * Springer stamps on all derived material with a link to the official book
+ * During production: share files with authors professionally
+   (GitHub/Bitbucket)
 
 !split
 ===== Trend: from linear monograph to graph of smaller, more independent units =====
@@ -157,7 +157,7 @@ FIGURE: [fig/graph_viz, with=200 frac=0.5]
 
 Add to wishlist:
  * Publish (modified) parts of a unit (from a book) online
- * Again, stamp derived material with link to the parent publication!
+ * Always stamp derived material with link to the parent publication!
 
 !split
 ===== Next generation video: "studix.com": "http://studix.com" =====
@@ -205,3 +205,20 @@ The publishing industry must
   * approve reuse of copyright material, with a watermark
   * realize that visibility is the important thing for authors
 !enotes
+
+!split
+===== Summary and wishlist =====
+
+!bblock Assertions
+ * Books must be available in more formats (PDF, HTML, epub, notebooks)
+ * The linear monograph will be a graph of more independent units
+!eblock
+
+!bblock Wishlist
+ * Alternative formats of a book can be published
+   (at Springer, GitHub, Zenodo, Figshare, ...)
+ * Publish (modified) parts of a unit (from a book) online
+ * Springer stamps on all derived material with a link to the official book
+ * During production: share files with authors professionally
+   (GitHub/Bitbucket)
+!eblock
