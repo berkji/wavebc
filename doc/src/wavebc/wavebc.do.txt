@@ -1,3 +1,7 @@
+# 2DO: Use footnotes, links, citations
+# Maybe a stripped version is fine for education of doconce/latex.
+# Consider if-else of blocks to create the small version.
+
 TITLE: On the impact of boundary conditions in a wave equation
 AUTHOR: Hans Petter Langtangen at Center for Biomedical Computing, Simula Research Laboratory & Department of Informatics, University of Oslo
 DATE: today
@@ -453,4 +457,3 @@ else:
 where `peridoc` becomes `True` when `u[-1] > eps` for some
 tolerance `eps`, say `1E-4` (i.e., the outgoing wave hits the right
 boundary).
-
