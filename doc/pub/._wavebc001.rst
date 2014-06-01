@@ -1,0 +1,244 @@
+.. !split
+
+.. _sec:math:
+
+Mathematical model and solution method
+======================================
+
+We solve a one-dimensional, linear, constant-coefficient
+wave equation by an explicit finite difference method.
+
+.. _sec:math:pde:
+
+The wave equation problem
+-------------------------
+
+The standard, linear wave equation in a homogeneous one-dimensional
+medium reads
+
+.. _Eq:math:pde:wave:eq:
+
+.. math::
+   :label: math:pde:wave:eq
+        
+        \frac{\partial^2 u}{\partial t^2} =
+        c^2 \frac{\partial^2 u}{\partial x^2}, \quad x\in (0,L),\ t\in (0,T]{\thinspace .}
+        
+        
+
+The unknown function :math:`u` depends on space :math:`x` and time :math:`t`: :math:`u=u(x,t)`.
+
+
+.. admonition:: The need for boundary conditions in the wave equation
+
+   Four initial and boundary conditions must be specified to have a
+   unique solution:
+   
+    * Initial condition for :math:`u(x,0)`
+   
+    * Initial condition for :math:`u_t(x,0)`
+   
+    * Boundary condition at :math:`x=0`
+   
+    * Boundary condition at :math:`x=L`
+
+
+
+
+.. _sec:math:ic:
+
+Initial conditions
+------------------
+
+Most demonstrations will start with an initial profile of :math:`u`,
+
+.. math::
+         u(x,0) = I(x), 
+
+being at rest, i.e.,
+
+.. math::
+         \frac{\partial}{\partial t}u(x,0) = 0{\thinspace .} 
+
+Two initial profiles will be considered:
+
+ * a plug as to left in Figure :ref:`fig:Gaussian`
+
+ * a Gaussian peak as to the right in Figure :ref:`fig:Gaussian`
+
+.. _fig:Gaussian:
+
+.. figure:: fig-wavebc/plug_Gaussian.png
+   :width: 800
+
+   *Examples on initial conditions*
+
+.. _sec:math:bc:
+
+Boundary conditions
+-------------------
+
+.. index:: Dirichlet boundary condition
+
+.. index::
+   single: boundary condition; Dirichlet
+
+.. index:: u=0 boundary condition
+
+.. index::
+   single: boundary condition; u=0
+
+Fixed :math:`u`
+~~~~~~~~~~~~~~~
+
+At :math:`x=0` we will sometimes use the condition :math:`u=0`, often known as
+a homogeneous *Dirichlet* condition. This condition will
+mirror the wave.
+
+.. index:: reflecting boundary condition
+
+.. index:: no-flux boundary condition
+
+.. index:: Neumann flux boundary condition
+
+.. index::
+   single: boundary condition; Neumann
+
+.. index::
+   single: boundary condition; reflecting
+
+.. index::
+   single: boundary condition; no-flux
+
+Reflecting condition
+~~~~~~~~~~~~~~~~~~~~
+
+At :math:`x=0` and/or :math:`x=L` we will apply a *reflecting* or *no-flux* condition:
+
+.. _Eq:sec:math:bc:dudn0:
+
+.. math::
+   :label: sec:math:bc:dudn0
+         \frac{\partial u}{\partial x}=0{\thinspace .}
+        
+        
+
+This condition reflects the wave into the domain again, as a surface wave
+hits a vertical wave, runs up to the double amplitude, and propagates
+back into the domain again. This type of boundary condition is also
+referred to as a *Neumann* condition.
+
+.. index:: feeding of wave at the boundary
+
+.. index:: incoming boundary wave
+
+.. index::
+   single: boundary condition; feeding of wave
+
+.. index::
+   single: boundary condition; incoming wave
+
+Feeding a wave from the boundary
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+We shall demonstrate the effect of moving :math:`u` at the boundary :math:`x=0` to
+feed the domain with an incoming wave. The boundary condition then reads
+
+.. math::
+         u(0,t) = U_0(t),
+
+for some given function :math:`U_0(t)`. A particular choice in a later
+demonstration is a sine function that is active in three different
+time intervals:
+
+.. math::
+         U_0 (t) = \left\lbrace\begin{array}{ll}
+        \frac{1}{4}\sin(6\pi t),& t\in T_1\hbox{ or } t\in T_2\hbox{ or } t\in T_3\\
+        0,& \hbox{otherwise}
+        \end{array}\right.
+        
+
+where :math:`T_1=[0, \frac{1}{6}]`, :math:`T_2=[\frac{3}{4}, \frac{5}{6}]`,
+and :math:`T_3=[\frac{3}{2},\frac{11}{6}]`. The movement of :math:`u` at the
+boundary will produce a wave that is by the PDE transported to
+the right into the domain.
+
+.. index:: open boundary condition
+
+.. index:: radiation condition
+
+.. index:: artificial boundary condition
+
+.. index::
+   single: boundary condition; open
+
+.. index::
+   single: boundary condition; radiation
+
+.. index::
+   single: boundary condition; artifical
+
+Open boundary condition
+~~~~~~~~~~~~~~~~~~~~~~~
+
+Very often one wants to let a wave travel through the boundary without
+being disturbed. Such a condition is called an *open* boundary condition,
+or a *radiation* condition, or an *artificial* boundary condition:
+
+.. _Eq:sec:math:bc:open:x0:
+
+.. math::
+   :label: sec:math:bc:open:x0
+        
+        \frac{\partial u}{\partial t} - c\frac{\partial u}{\partial x} = 0,\quad x=0,
+        
+        
+
+.. _Eq:sec:math:bc:open:xL:
+
+.. math::
+   :label: sec:math:bc:open:xL
+         
+        \frac{\partial u}{\partial t} + c\frac{\partial u}{\partial x} = 0,\quad x=L{\thinspace .}
+        
+        
+
+These conditions work exactly in 1D, but are challenging to generalize
+and implement in 2D and 3D.
+
+Periodic boundary condition
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+When following a wave motion over large distances, it is desireable to
+let a wave travel out of the right domain
+and at the same time feed the wave back into the domain from the left.
+This approach avoids a very large domain where nothing happens in
+the majority of the domain. A *periodic* boundary condition at :math:`x=0`
+can be used to feed the signal traveling out at :math:`x=L` into the domain:
+
+.. _Eq:sec:math:bc:periodic:
+
+.. math::
+   :label: sec:math:bc:periodic
+        
+        u(0,t) = u(L,t){\thinspace .}
+        
+        
+
+The condition at :math:`x=L` is then an open boundary condition
+:eq:`sec:math:bc:open:xL`.
+
+Numerical solution method
+-------------------------
+
+The wave equation is solved by an explicit finite difference method,
+which is of second-order in space and time. A uniform mesh with
+spacing :math:`\Delta x` and :math:`\Delta t` is used in space and time,
+respectively. The no-flux or Neumann boundary conditions are implemented
+by modifying the computational stencil at the boundary. The
+open boundary conditions are implemented by forward in time,
+upstream in space finite differences, which exactly let the wave out
+of the boundary. More details are found in Appendix :ref:`sec:app:numerical`.
+Parts of the computer code are explained in
+Appendix :ref:`sec:app:code`.
+

@@ -49,3 +49,4 @@ pdflatex -shell-escape $name
 mv -f $name.pdf $dest/${name}.pdf
 
 # Can now publish $dest directory
+cp -r $dest/*.html $dest/._*.html $dest/*.pdf $dest/*-wavebc $dest/sphinx-* ../../pub/

@@ -1,0 +1,285 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Mathematical model and solution method</title>
+    
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="_static/sidebar.js"></script>
+
+        <script src="http://sagecell.sagemath.org/static/jquery.min.js"></script>
+        <script src="http://sagecell.sagemath.org/static/embedded_sagecell.js"></script>
+
+        <script>sagecell.makeSagecell({inputLocation: ".sage"});</script>
+
+        <style type="text/css">
+                .sagecell .CodeMirror-scroll {
+                        overflow-y: hidden;
+                        overflow-x: auto;
+                }
+                .sagecell .CodeMirror {
+                        height: auto;
+                }
+        </style>
+
+    
+    <link rel="top" title="On the impact of boundary conditions in a wave equation" href="index.html" />
+    <link rel="next" title="Demonstrations" href="._wavebc002.html" />
+    <link rel="prev" title="On the impact of boundary conditions in a wave equation" href="._wavebc000.html" />
+ 
+  
+   <style type="text/css">
+     div.admonition {
+       background-color: whiteSmoke;
+       border: 1px solid #bababa;
+     }
+   </style>
+  </head>
+
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="._wavebc002.html" title="Demonstrations"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="._wavebc000.html" title="On the impact of boundary conditions in a wave equation"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">On the impact of boundary conditions in a wave equation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="mathematical-model-and-solution-method">
+<span id="sec-math"></span><h1>Mathematical model and solution method<a class="headerlink" href="#mathematical-model-and-solution-method" title="Permalink to this headline">¶</a></h1>
+<p>We solve a one-dimensional, linear, constant-coefficient
+wave equation by an explicit finite difference method.</p>
+<div class="section" id="the-wave-equation-problem">
+<span id="sec-math-pde"></span><h2>The wave equation problem<a class="headerlink" href="#the-wave-equation-problem" title="Permalink to this headline">¶</a></h2>
+<p>The standard, linear wave equation in a homogeneous one-dimensional
+medium reads</p>
+<div class="math" id="equation-math:pde:wave:eq">
+<span id="eq-math-pde-wave-eq"></span><span class="eqno">(1)</span>\[     \frac{\partial^2 u}{\partial t^2} =
+     c^2 \frac{\partial^2 u}{\partial x^2}, \quad x\in (0,L),\ t\in (0,T]{\thinspace .}\]</div>
+<p>The unknown function <span class="math">\(u\)</span> depends on space <span class="math">\(x\)</span> and time <span class="math">\(t\)</span>: <span class="math">\(u=u(x,t)\)</span>.</p>
+<div class="admonition-the-need-for-boundary-conditions-in-the-wave-equation admonition">
+<p class="first admonition-title">The need for boundary conditions in the wave equation</p>
+<p>Four initial and boundary conditions must be specified to have a
+unique solution:</p>
+<blockquote class="last">
+<div><ul class="simple">
+<li>Initial condition for <span class="math">\(u(x,0)\)</span></li>
+<li>Initial condition for <span class="math">\(u_t(x,0)\)</span></li>
+<li>Boundary condition at <span class="math">\(x=0\)</span></li>
+<li>Boundary condition at <span class="math">\(x=L\)</span></li>
+</ul>
+</div></blockquote>
+</div>
+</div>
+<div class="section" id="initial-conditions">
+<span id="sec-math-ic"></span><h2>Initial conditions<a class="headerlink" href="#initial-conditions" title="Permalink to this headline">¶</a></h2>
+<p>Most demonstrations will start with an initial profile of <span class="math">\(u\)</span>,</p>
+<div class="math">
+\[u(x,0) = I(x),\]</div>
+<p>being at rest, i.e.,</p>
+<div class="math">
+\[\frac{\partial}{\partial t}u(x,0) = 0{\thinspace .}\]</div>
+<p>Two initial profiles will be considered:</p>
+<blockquote>
+<div><ul class="simple">
+<li>a plug as to left in Figure <a class="reference internal" href="#fig-gaussian"><em>Examples on initial conditions</em></a></li>
+<li>a Gaussian peak as to the right in Figure <a class="reference internal" href="#fig-gaussian"><em>Examples on initial conditions</em></a></li>
+</ul>
+</div></blockquote>
+<div class="figure" id="fig-gaussian">
+<a class="reference internal image-reference" href="_images/plug_Gaussian.png"><img alt="_images/plug_Gaussian.png" src="_images/plug_Gaussian.png" style="width: 800px;" /></a>
+<p class="caption"><em>Examples on initial conditions</em></p>
+</div>
+</div>
+<div class="section" id="boundary-conditions">
+<span id="sec-math-bc"></span><h2>Boundary conditions<a class="headerlink" href="#boundary-conditions" title="Permalink to this headline">¶</a></h2>
+<span class="target" id="index-0"></span><span class="target" id="index-1"></span><span class="target" id="index-2"></span><div class="section" id="fixed">
+<span id="index-3"></span><h3>Fixed <span class="math">\(u\)</span><a class="headerlink" href="#fixed" title="Permalink to this headline">¶</a></h3>
+<p>At <span class="math">\(x=0\)</span> we will sometimes use the condition <span class="math">\(u=0\)</span>, often known as
+a homogeneous <em>Dirichlet</em> condition. This condition will
+mirror the wave.</p>
+<span class="target" id="index-4"></span><span class="target" id="index-5"></span><span class="target" id="index-6"></span><span class="target" id="index-7"></span><span class="target" id="index-8"></span></div>
+<div class="section" id="reflecting-condition">
+<span id="index-9"></span><h3>Reflecting condition<a class="headerlink" href="#reflecting-condition" title="Permalink to this headline">¶</a></h3>
+<p>At <span class="math">\(x=0\)</span> and/or <span class="math">\(x=L\)</span> we will apply a <em>reflecting</em> or <em>no-flux</em> condition:</p>
+<div class="math" id="equation-sec:math:bc:dudn0 \frac{\partial u}{\partial x}=0{\thinspace .}">
+<span id="eq-sec-math-bc-dudn0"></span></div>
+<p>This condition reflects the wave into the domain again, as a surface wave
+hits a vertical wave, runs up to the double amplitude, and propagates
+back into the domain again. This type of boundary condition is also
+referred to as a <em>Neumann</em> condition.</p>
+<span class="target" id="index-10"></span><span class="target" id="index-11"></span><span class="target" id="index-12"></span></div>
+<div class="section" id="feeding-a-wave-from-the-boundary">
+<span id="index-13"></span><h3>Feeding a wave from the boundary<a class="headerlink" href="#feeding-a-wave-from-the-boundary" title="Permalink to this headline">¶</a></h3>
+<p>We shall demonstrate the effect of moving <span class="math">\(u\)</span> at the boundary <span class="math">\(x=0\)</span> to
+feed the domain with an incoming wave. The boundary condition then reads</p>
+<div class="math">
+\[u(0,t) = U_0(t),\]</div>
+<p>for some given function <span class="math">\(U_0(t)\)</span>. A particular choice in a later
+demonstration is a sine function that is active in three different
+time intervals:</p>
+<div class="math">
+\[\begin{split}U_0 (t) = \left\lbrace\begin{array}{ll}
+\frac{1}{4}\sin(6\pi t),&amp; t\in T_1\hbox{ or } t\in T_2\hbox{ or } t\in T_3\\
+0,&amp; \hbox{otherwise}
+\end{array}\right.\end{split}\]</div>
+<p>where <span class="math">\(T_1=[0, \frac{1}{6}]\)</span>, <span class="math">\(T_2=[\frac{3}{4}, \frac{5}{6}]\)</span>,
+and <span class="math">\(T_3=[\frac{3}{2},\frac{11}{6}]\)</span>. The movement of <span class="math">\(u\)</span> at the
+boundary will produce a wave that is by the PDE transported to
+the right into the domain.</p>
+<span class="target" id="index-14"></span><span class="target" id="index-15"></span><span class="target" id="index-16"></span><span class="target" id="index-17"></span><span class="target" id="index-18"></span></div>
+<div class="section" id="open-boundary-condition">
+<span id="index-19"></span><h3>Open boundary condition<a class="headerlink" href="#open-boundary-condition" title="Permalink to this headline">¶</a></h3>
+<p>Very often one wants to let a wave travel through the boundary without
+being disturbed. Such a condition is called an <em>open</em> boundary condition,
+or a <em>radiation</em> condition, or an <em>artificial</em> boundary condition:</p>
+<div class="math" id="equation-sec:math:bc:open:x0">
+<span id="eq-sec-math-bc-open-x0"></span><span class="eqno">(3)</span>\[     \frac{\partial u}{\partial t} - c\frac{\partial u}{\partial x} = 0,\quad x=0,\]</div>
+<div class="math" id="equation-sec:math:bc:open:xL">
+<span id="eq-sec-math-bc-open-xl"></span><span class="eqno">(4)</span>\[     \frac{\partial u}{\partial t} + c\frac{\partial u}{\partial x} = 0,\quad x=L{\thinspace .}\]</div>
+<p>These conditions work exactly in 1D, but are challenging to generalize
+and implement in 2D and 3D.</p>
+</div>
+<div class="section" id="periodic-boundary-condition">
+<h3>Periodic boundary condition<a class="headerlink" href="#periodic-boundary-condition" title="Permalink to this headline">¶</a></h3>
+<p>When following a wave motion over large distances, it is desireable to
+let a wave travel out of the right domain
+and at the same time feed the wave back into the domain from the left.
+This approach avoids a very large domain where nothing happens in
+the majority of the domain. A <em>periodic</em> boundary condition at <span class="math">\(x=0\)</span>
+can be used to feed the signal traveling out at <span class="math">\(x=L\)</span> into the domain:</p>
+<div class="math" id="equation-sec:math:bc:periodic">
+<span id="eq-sec-math-bc-periodic"></span><span class="eqno">(5)</span>\[     u(0,t) = u(L,t){\thinspace .}\]</div>
+<p>The condition at <span class="math">\(x=L\)</span> is then an open boundary condition
+<a href="#equation-sec:math:bc:open:xL">(4)</a>.</p>
+</div>
+</div>
+<div class="section" id="numerical-solution-method">
+<h2>Numerical solution method<a class="headerlink" href="#numerical-solution-method" title="Permalink to this headline">¶</a></h2>
+<p>The wave equation is solved by an explicit finite difference method,
+which is of second-order in space and time. A uniform mesh with
+spacing <span class="math">\(\Delta x\)</span> and <span class="math">\(\Delta t\)</span> is used in space and time,
+respectively. The no-flux or Neumann boundary conditions are implemented
+by modifying the computational stencil at the boundary. The
+open boundary conditions are implemented by forward in time,
+upstream in space finite differences, which exactly let the wave out
+of the boundary. More details are found in Appendix <a class="reference internal" href="._wavebc003.html#sec-app-numerical"><em>Appendix: Numerical solution method</em></a>.
+Parts of the computer code are explained in
+Appendix <a class="reference internal" href="._wavebc004.html#sec-app-code"><em>Appendix: Computer code</em></a>.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <center>
+            <p class="logo"><a href="http://cbc.simula.no/" title="Go to Center for Biomedical Computing">
+              <img class="logo" src="_static/cbc_logo.png" alt="Logo"/>
+            </a></p>
+            </center>
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Mathematical model and solution method</a><ul>
+<li><a class="reference internal" href="#the-wave-equation-problem">The wave equation problem</a></li>
+<li><a class="reference internal" href="#initial-conditions">Initial conditions</a></li>
+<li><a class="reference internal" href="#boundary-conditions">Boundary conditions</a><ul>
+<li><a class="reference internal" href="#fixed">Fixed <span class="math">\(u\)</span></a></li>
+<li><a class="reference internal" href="#reflecting-condition">Reflecting condition</a></li>
+<li><a class="reference internal" href="#feeding-a-wave-from-the-boundary">Feeding a wave from the boundary</a></li>
+<li><a class="reference internal" href="#open-boundary-condition">Open boundary condition</a></li>
+<li><a class="reference internal" href="#periodic-boundary-condition">Periodic boundary condition</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#numerical-solution-method">Numerical solution method</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="._wavebc000.html"
+                        title="previous chapter">On the impact of boundary conditions in a wave equation</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="._wavebc002.html"
+                        title="next chapter">Demonstrations</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/._wavebc001.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" size="18" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="._wavebc002.html" title="Demonstrations"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="._wavebc000.html" title="On the impact of boundary conditions in a wave equation"
+             >previous</a> |</li>
+        <li><a href="index.html">On the impact of boundary conditions in a wave equation</a> &raquo;</li> 
+      </ul>
+    </div>
+<div class="wrapper">
+  <div class="footer">
+  <a href="http://cbc.simula.no"><img src="_static/cbc_banner.png" width="100%"><a>
+  </div>
+</div>
+
+  </body>
+</html>

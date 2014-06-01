@@ -1,0 +1,213 @@
+<!--
+Automatically generated HTML file from Doconce source
+(https://github.com/hplgit/doconce/)
+-->
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="Doconce: https://github.com/hplgit/doconce/" />
+<meta name="description" content="On the impact of boundary conditions in a wave equation">
+<meta name="keywords" content="Dirichlet boundary condition,boundary condition Dirichlet,$u=0$ boundary condition,boundary condition $u=0$,reflecting boundary condition,no-flux boundary condition,Neumann flux boundary condition,boundary condition Neumann,boundary condition reflecting,boundary condition no-flux,feeding of wave at the boundary,incoming boundary wave,boundary condition feeding of wave,boundary condition incoming wave,open boundary condition,radiation condition,artificial boundary condition,boundary condition open,boundary condition radiation,boundary condition artifical">
+
+
+
+<style type="text/css">
+    /* solarized style */
+    body {
+      margin:5;
+      padding:0;
+      border:0;	/* Remove the border around the viewport in old versions of IE */
+      width:100%;
+      background: #fdf6e3;
+      min-width:600px;	/* Minimum width of layout - remove if not required */
+      font-family: Verdana, Helvetica, Arial, sans-serif;
+      font-size: 1.0em;
+      line-height: 1.3em;
+      color: #657b83;
+    }
+    a { color: #657b83; text-decoration:underline; }
+    a:hover { color: #b58900; background: #eee8d5; text-decoration:none; }
+    h1, h2, h3 { margin:.8em 0 .2em 0; padding:0; line-height: 125%; }
+    h2 { font-variant: small-caps; }
+    pre {
+      background: #fdf6e3;
+      -webkit-box-shadow: inset 0 0 2px #000000;
+      -moz-box-shadow: inset 0 0 2px #000000;
+      box-shadow: inset 0 0 2px #000000;
+      color: #586e75;
+      margin-left: 0px;
+      font-family: 'Droid Sans Mono', monospace;
+      padding: 2px;
+      -webkit-border-radius: 4px;
+      -moz-border-radius: 4px;
+      border-radius: 4px;
+      -moz-background-clip: padding;
+      -webkit-background-clip: padding-box;
+      background-clip: padding-box;
+    }
+    tt, code { font-family: "Courier New", Courier; }
+    hr { border: 0; width: 80%; border-bottom: 1px solid #aaa}
+    p { text-indent: 0px; }
+    p.caption { width: 80%; font-style: normal; text-align: left; }
+    hr.figure { border: 0; width: 80%; border-bottom: 1px solid #aaa}
+    .alert-text-small   { font-size: 80%;  }
+    .alert-text-large   { font-size: 130%; }
+    .alert-text-normal  { font-size: 90%;  }
+    .alert {
+             padding:8px 35px 8px 14px; margin-bottom:18px;
+             text-shadow:0 1px 0 rgba(255,255,255,0.5);
+             border:1px solid #FFBF00;
+             border-radius: 4px;
+             -webkit-border-radius: 4px;
+             -moz-border-radius: 4px;
+             color: #555;
+             background-color: #fbeed5;
+             background-position: 10px 5px;
+             background-repeat: no-repeat;
+             background-size: 38px;
+             padding-left: 55px;
+             width: 75%;
+     }
+     .alert-block {padding-top:14px; padding-bottom:14px}
+     .alert-block > p, .alert-block > ul {margin-bottom:1em}
+     .alert li {margin-top: 1em}
+     .alert-block p+p {margin-top:5px}
+     .alert-notice { background-image: url(https://raw.github.com/hplgit/doconce/master/bundled/html_images/small_yellow_notice.png); }
+     .alert-summary  { background-image:url(https://raw.github.com/hplgit/doconce/master/bundled/html_images/small_yellow_summary.png); }
+     .alert-warning { background-image: url(https://raw.github.com/hplgit/doconce/master/bundled/html_images/small_yellow_warning.png); }
+     .alert-question {background-image:url(https://raw.github.com/hplgit/doconce/master/bundled/html_images/small_yellow_question.png); }
+
+</style>
+
+</head>
+
+<!-- tocinfo
+{'highest level': 1,
+ 'sections': [(' Mathematical model and solution method ',
+               1,
+               'sec:math',
+               'sec:math'),
+              (' The wave equation problem ',
+               2,
+               'sec:math:pde',
+               'sec:math:pde'),
+              (' Initial conditions ', 2, 'sec:math:ic', 'sec:math:ic'),
+              (' Boundary conditions ', 2, 'sec:math:bc', 'sec:math:bc'),
+              (' Fixed $u$ ', 3, None, '___sec4'),
+              (' Reflecting condition ', 3, None, '___sec5'),
+              (' Feeding a wave from the boundary ', 3, None, '___sec6'),
+              (' Open boundary condition ', 3, None, '___sec7'),
+              (' Periodic boundary condition ', 3, None, '___sec8'),
+              (' Numerical solution method ', 2, None, '___sec9'),
+              (' Demonstrations ', 1, None, '___sec10'),
+              (' Dirichlet and Neumann conditions: reflecting and mirroring boundaries ',
+               2,
+               None,
+               '___sec11'),
+              (' Numerical noise ', 3, None, '___sec12'),
+              (' Effect of impulsive start of waves ', 2, None, '___sec13'),
+              (' Feeding of waves from the boundary ', 2, None, '___sec14'),
+              (' Open and periodic boundary conditions ',
+               2,
+               None,
+               '___sec15'),
+              (' Error in the open boundary condition ', 3, None, '___sec16'),
+              (' Appendix: Numerical solution method ',
+               1,
+               'sec:app:numerical',
+               'sec:app:numerical'),
+              (' Approximating the wave equation ', 2, None, '___sec18'),
+              (' Approximating the initial conditions ', 2, None, '___sec19'),
+              (' Approximation of boundary conditions ', 2, None, '___sec20'),
+              (' Dirichlet conditions ', 3, None, '___sec21'),
+              (' Neumann conditions ', 3, None, '___sec22'),
+              (' Open boundary conditions ', 3, None, '___sec23'),
+              (' Periodic conditions ', 3, None, '___sec24'),
+              (' Appendix: Computer code ',
+               1,
+               'sec:app:code',
+               'sec:app:code')]}
+end of tocinfo -->
+
+<body>
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: {
+     equationNumbers: {  autoNumber: "none"  },
+     extensions: ["AMSmath.js", "AMSsymbols.js", "autobold.js"]
+  }
+});
+</script>
+<script type="text/javascript"
+ src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<!-- Fix slow MathJax rendering in IE8 -->
+<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7">
+
+
+<!-- newcommands_keep.tex -->
+$$
+\newcommand{\half}{\frac{1}{2}}
+\newcommand{\halfi}{{1/2}}
+\newcommand{\tp}{\thinspace .}
+$$
+
+
+
+
+    
+<a name="part0000"></a>
+<!-- begin top navigation -->
+<a href="._wavebc_solarized001.html"><img src="http://hplgit.github.io/doconce/bundled/html_images/next1.png" border=0 alt="Next &raquo;"></a>
+<!-- end top navigation -->
+
+<p>
+<!-- ------------------- main content ---------------------- -->
+
+<!-- 2DO: Use footnotes, links, citations -->
+<!-- Maybe a stripped version is fine for education of doconce/latex. -->
+<!-- Consider if-else of blocks to create the small version. -->
+
+<title>On the impact of boundary conditions in a wave equation</title>
+
+<center><h1>On the impact of boundary conditions in a wave equation</h1></center>  <!-- document title -->
+
+<p>
+<!-- author(s): Hans Petter Langtangen -->
+
+<center>
+<b>Hans Petter Langtangen</b> [1, 2]
+</center>
+
+
+<p>
+<!-- institution(s) -->
+
+<center>[1] <b>Center for Biomedical Computing, Simula Research Laboratory</b></center>
+<center>[2] <b>Department of Informatics, University of Oslo</b></center>
+<p>
+<center><h4>Jun 1, 2014</h4></center> <!-- date -->
+<p>
+<b>Summary.</b> The purpose of this document is to demonstrate how
+different types of boundary conditions impacts the solution of
+standard, linear wave equation in one spatial dimension. Four types of
+conditions are treated: known value (Dirichlet condition), zero flux
+(Neumann condition), open boundary, and periodic boundary.
+
+<p>
+<!-- Sphinx shows no table of contents (TOC) so two splits create an empty page -->
+<p>
+<!-- begin bottom navigation -->
+<a href="._wavebc_solarized001.html"><img src="http://hplgit.github.io/doconce/bundled/html_images/next1.png" border=0 alt="Next &raquo;"></a>
+<!-- end bottom navigation -->
+
+<!-- ------------------- end of main content --------------- -->
+
+
+</body>
+</html>
+    
+

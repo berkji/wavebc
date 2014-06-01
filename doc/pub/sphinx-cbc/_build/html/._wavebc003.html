@@ -1,0 +1,257 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Appendix: Numerical solution method</title>
+    
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="_static/sidebar.js"></script>
+
+        <script src="http://sagecell.sagemath.org/static/jquery.min.js"></script>
+        <script src="http://sagecell.sagemath.org/static/embedded_sagecell.js"></script>
+
+        <script>sagecell.makeSagecell({inputLocation: ".sage"});</script>
+
+        <style type="text/css">
+                .sagecell .CodeMirror-scroll {
+                        overflow-y: hidden;
+                        overflow-x: auto;
+                }
+                .sagecell .CodeMirror {
+                        height: auto;
+                }
+        </style>
+
+    
+    <link rel="top" title="On the impact of boundary conditions in a wave equation" href="index.html" />
+    <link rel="next" title="Appendix: Computer code" href="._wavebc004.html" />
+    <link rel="prev" title="Demonstrations" href="._wavebc002.html" />
+ 
+  
+   <style type="text/css">
+     div.admonition {
+       background-color: whiteSmoke;
+       border: 1px solid #bababa;
+     }
+   </style>
+  </head>
+
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="._wavebc004.html" title="Appendix: Computer code"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="._wavebc002.html" title="Demonstrations"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">On the impact of boundary conditions in a wave equation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="appendix-numerical-solution-method">
+<span id="sec-app-numerical"></span><h1>Appendix: Numerical solution method<a class="headerlink" href="#appendix-numerical-solution-method" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="approximating-the-wave-equation">
+<h2>Approximating the wave equation<a class="headerlink" href="#approximating-the-wave-equation" title="Permalink to this headline">¶</a></h2>
+<p>We introduce a uniform mesh in space and time with spacings
+<span class="math">\(\Delta x\)</span> and <span class="math">\(\Delta t\)</span>, respectively. At each mesh
+point</p>
+<div class="math">
+\[(x_i,t_n),\quad x_i=i\Delta x,\ i=0,\ldots,N_x,\quad t_n=n\Delta t,
+\ n=0,\ldots,N_t,\]</div>
+<p>the wave equation is approximated by second-order finite differences,</p>
+<div class="math">
+\[\begin{split}\frac{\partial^2}{\partial t^2}u(x_i,t_n) &amp;\approx
+\frac{u_i^{n+1} - 2u_i^n + u^{n-1}_i}{\Delta t^2},\\
+\frac{\partial^2}{\partial x^2}u(x_i,t_n) &amp;\approx
+\frac{u_{i+1}^{n} - 2u_i^n + u^{n}_{i-1}}{\Delta x^2},\end{split}\]</div>
+<p>where <span class="math">\(u^n_i\)</span> is the numerical approximation to the exact solution
+at <span class="math">\((x_i,t_n)\)</span>.
+These approximations give rise to an explicit scheme where a new
+value <span class="math">\(u^{n+1}_i\)</span> is given by the formula</p>
+<div class="math" id="equation-sec:app:numerical:scheme">
+<span id="eq-sec-app-numerical-scheme"></span><span class="eqno">(1)</span>\[     u^{n+1}_i = -u^{n-1}_i + 2u^n_i + C^2
+     \left(u^{n}_{i+1}-2u^{n}_{i} + u^{n}_{i-1}\right),\]</div>
+<p>where the parameter <span class="math">\(C\)</span>,</p>
+<div class="math">
+\[C = c\frac{\Delta t}{\Delta x},\]</div>
+<p>is known as the dimensionless <em>Courant number</em>. A stable time-stepping
+is ensured only if <span class="math">\(C\leq 1\)</span>. The value <span class="math">\(C\)</span> governs also the accuracy
+of the method: <span class="math">\(C=1\)</span> actually reproduces the exact solution (!), while
+the accuracy is reduced when decreasing <span class="math">\(C\)</span>.</p>
+</div>
+<div class="section" id="approximating-the-initial-conditions">
+<h2>Approximating the initial conditions<a class="headerlink" href="#approximating-the-initial-conditions" title="Permalink to this headline">¶</a></h2>
+<p>The initial condition <span class="math">\(u(x,0)=I(x)\)</span>, where <span class="math">\(I(x)\)</span> is a prescribed
+mathematical function, is implemented in the numerical method by</p>
+<div class="math">
+\[u(x_i,0) = I(x_i),\quad i=0,\ldots,N_x{\thinspace .}\]</div>
+<p>The other initial condition,</p>
+<div class="math">
+\[\frac{\partial}{\partial t}(x,0) = 0,\hbox{ or }
+\frac{\partial}{\partial t}(x,0) = V(x),\]</div>
+<p>is approximated by a centered difference over an interval <span class="math">\(2\Delta t\)</span>.
+When this difference is combined with <a href="#equation-sec:app:numerical:scheme">(1)</a>,
+we get a special formula for <span class="math">\(u^1_i\)</span>. Thereafter, for <span class="math">\(n\geq 1\)</span>,
+one can apply <a href="#equation-sec:app:numerical:scheme">(1)</a>.</p>
+</div>
+<div class="section" id="approximation-of-boundary-conditions">
+<h2>Approximation of boundary conditions<a class="headerlink" href="#approximation-of-boundary-conditions" title="Permalink to this headline">¶</a></h2>
+<p>The finite difference scheme <a href="#equation-sec:app:numerical:scheme">(1)</a> is
+applied at all <em>inner points</em> in the spatial mesh, <span class="math">\(i=1,\ldots,N_x-1\)</span>.
+For <span class="math">\(i=1\)</span> or <span class="math">\(i=N_x-1\)</span>, <a href="#equation-sec:app:numerical:scheme">(1)</a> involves
+the boundary points <span class="math">\(u^n_0\)</span> or <span class="math">\(u^n_{N_x}\)</span> (respectively) at the
+previous time step, but these are condidered known.</p>
+<div class="section" id="dirichlet-conditions">
+<h3>Dirichlet conditions<a class="headerlink" href="#dirichlet-conditions" title="Permalink to this headline">¶</a></h3>
+<p>In case of <span class="math">\(u=0\)</span> (Dirichlet) conditions, we just set <span class="math">\(u^{n+1}_0=0\)</span>
+and <span class="math">\(u^{n+1}_{N_x}=0\)</span>. Feeding a wave in from the left is just
+a matter of setting <span class="math">\(u^{n+1}_0\)</span> equal to the known boundary function of
+time: <span class="math">\(u^{n+1}_0=U_0((n+1)\Delta t)\)</span>.</p>
+</div>
+<div class="section" id="neumann-conditions">
+<h3>Neumann conditions<a class="headerlink" href="#neumann-conditions" title="Permalink to this headline">¶</a></h3>
+<p>No-flux or Neumann conditions are
+discretized by a centered finite difference and combined with
+<a href="#equation-sec:app:numerical:scheme">(1)</a>, yielding a modified form of
+<a href="#equation-sec:app:numerical:scheme">(1)</a> at the boundary:</p>
+<div class="math">
+\[u^{n+1}_i = -u^{n-1}_i  + 2u^n_i + 2C^2
+\left(u^{n}_{i+1}-u^{n}_{i}\right),\quad i=0\]</div>
+<div class="math">
+\[u^{n+1}_i = -u^{n-1}_i + 2u^n_i + 2C^2
+\left(u^{n}_{i-1}-u^{n}_{i}\right),\quad i=N_x{\thinspace .}\]</div>
+</div>
+<div class="section" id="open-boundary-conditions">
+<h3>Open boundary conditions<a class="headerlink" href="#open-boundary-conditions" title="Permalink to this headline">¶</a></h3>
+<p>Radiation, artificial, or open boundary conditions of the type
+<a class="reference internal" href="._wavebc001.html#eq-sec-math-bc-open-x0"><em>(2.3)</em></a>-<a class="reference internal" href="._wavebc001.html#eq-sec-math-bc-open-xl"><em>(2.4)</em></a> are
+discretized by upstream first-order, forward in time differences,
+resulting in explicit updating formulas:</p>
+<div class="math">
+\[u^{n+1}_i = u^n_i + C(u^n_{i+1} - u^n_i),\quad i=0,\]</div>
+<div class="math">
+\[u^{n+1}_i = u^n_i - C(u^n_{i} - u^n_{i-1}),\quad i=N_x{\thinspace .}\]</div>
+<p>Even though the underlying finite differences are of first order only,
+these conditions let the waves out of the domain perfectly and do not
+lower the accuracy of the finite difference scheme used in the interior
+of the domain or at no-flux (Neumann) boundaries.</p>
+</div>
+<div class="section" id="periodic-conditions">
+<h3>Periodic conditions<a class="headerlink" href="#periodic-conditions" title="Permalink to this headline">¶</a></h3>
+<p>The periodic condition <span class="math">\(u(0,t)=u(L,t)\)</span> is trivial to incorporate in
+the numerical method:</p>
+<div class="math">
+\[u^{n+1}_0 = u^{n+1}_{N_x}{\thinspace .}\]</div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <center>
+            <p class="logo"><a href="http://cbc.simula.no/" title="Go to Center for Biomedical Computing">
+              <img class="logo" src="_static/cbc_logo.png" alt="Logo"/>
+            </a></p>
+            </center>
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Appendix: Numerical solution method</a><ul>
+<li><a class="reference internal" href="#approximating-the-wave-equation">Approximating the wave equation</a></li>
+<li><a class="reference internal" href="#approximating-the-initial-conditions">Approximating the initial conditions</a></li>
+<li><a class="reference internal" href="#approximation-of-boundary-conditions">Approximation of boundary conditions</a><ul>
+<li><a class="reference internal" href="#dirichlet-conditions">Dirichlet conditions</a></li>
+<li><a class="reference internal" href="#neumann-conditions">Neumann conditions</a></li>
+<li><a class="reference internal" href="#open-boundary-conditions">Open boundary conditions</a></li>
+<li><a class="reference internal" href="#periodic-conditions">Periodic conditions</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="._wavebc002.html"
+                        title="previous chapter">Demonstrations</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="._wavebc004.html"
+                        title="next chapter">Appendix: Computer code</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/._wavebc003.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" size="18" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="._wavebc004.html" title="Appendix: Computer code"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="._wavebc002.html" title="Demonstrations"
+             >previous</a> |</li>
+        <li><a href="index.html">On the impact of boundary conditions in a wave equation</a> &raquo;</li> 
+      </ul>
+    </div>
+<div class="wrapper">
+  <div class="footer">
+  <a href="http://cbc.simula.no"><img src="_static/cbc_banner.png" width="100%"><a>
+  </div>
+</div>
+
+  </body>
+</html>
