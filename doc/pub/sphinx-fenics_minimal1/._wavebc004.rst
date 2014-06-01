@@ -1,0 +1,167 @@
+.. !split
+
+.. _sec:app:code:
+
+Appendix: Computer code
+=======================
+
+The complete code used for all experiments except those involving
+periodic boundary conditions can be found in
+the file `wave1D_dn.py <http://tinyurl.com/jvzzcfn/wave/wave1D/wave1D_dn.py>`_. The basic solver function for problems without open boundary
+conditions and periodic conditions is listed below.
+
+The key computation is the time stepping loop where
+:ref:`(4.1) <Eq:sec:app:numerical:scheme>` is used to find new :math:`u^{n+1}_i`
+values at each time level. In addition, a special formula for
+the first step is needed, and boundary conditions must be
+incorporated at the boundary points.
+
+.. code-block:: python
+
+        from numpy import linspace, zeros
+        
+        def solver(I, V, f, c, U_0, U_L, L, dt, C, T,
+                   user_action=None, version='scalar'):
+            """
+            Solve u_tt = c**2*u_xx for x in [0,L] and t in [0,T],
+            with u(x,0)=I(x), u_t(x,t)=V(x), u(0,t)=U_0(t), u(L,t)=U_L(t),
+            and time step size dt and Courant number C.
+            A Neumann condition is applied by setting U_0 or  U_L to None.
+            user_action(u, x, t, n) is called at every time step with
+            time t[n], the solution in array u, and corresponding to x
+            coordinates in array x.
+            """
+            Nt = int(round(T/dt))          # No of time intervals
+            t = linspace(0, Nt*dt, Nt+1)   # Mesh points in time
+            dx = dt*c/float(C)             # Mesh spacing
+            Nx = int(round(L/dx))          # No of space intervals
+            x = linspace(0, L, Nx+1)       # Mesh points in space
+        
+            C2 = C**2; dt2 = dt*dt         # Help variables in the scheme
+        
+            u   = zeros(Nx+1)    # Solution array at new time level
+            u_1 = zeros(Nx+1)    # Solution at 1 time level back
+            u_2 = zeros(Nx+1)    # Solution at 2 time levels back
+        
+            Ix = range(0, Nx+1)  # Indices for x mesh
+            It = range(0, Nt+1)  # Indices for t mesh
+        
+            # Load initial condition into u_1
+            for i in Ix:
+                u_1[i] = I(x[i])
+        
+            if user_action is not None:
+                user_action(u_1, x, t, 0)
+        
+            # Special formula for the first step
+            for i in Ix[1:-1]:
+                u[i] = u_1[i] + dt*V(x[i]) + \ 
+                       0.5*C2*(u_1[i-1] - 2*u_1[i] + u_1[i+1]) + \ 
+                       0.5*dt2*f(x[i], t[0])
+        
+            i = Ix[0]
+            if U_0 is None:
+                # Set boundary values du/dn = 0
+                # x=0: i-1 -> i+1 since u[i-1]=u[i+1]
+                # x=L: i+1 -> i-1 since u[i+1]=u[i-1])
+                ip1 = i+1
+                im1 = ip1  # i-1 -> i+1
+                u[i] = u_1[i] + dt*V(x[i]) + \ 
+                       0.5*C2*(u_1[im1] - 2*u_1[i] + u_1[ip1]) + \ 
+                       0.5*dt2*f(x[i], t[0])
+            else:
+                u[0] = U_0(dt)
+        
+            i = Ix[-1]
+            if U_L is None:
+                im1 = i-1
+                ip1 = im1  # i+1 -> i-1
+                u[i] = u_1[i] + dt*V(x[i]) + \ 
+                       0.5*C2*(u_1[im1] - 2*u_1[i] + u_1[ip1]) + \ 
+                       0.5*dt2*f(x[i], t[0])
+            else:
+                u[i] = U_L(dt)
+        
+            if user_action is not None:
+                user_action(u, x, t, 1)
+        
+            # Update data structures for next step
+            u_2[:], u_1[:] = u_1, u
+        
+            for n in It[1:-1]:
+                # Update all inner points
+                if version == 'scalar':
+                    for i in Ix[1:-1]:
+                        u[i] = - u_2[i] + 2*u_1[i] + \ 
+                               C2*(u_1[i-1] - 2*u_1[i] + u_1[i+1]) + \ 
+                               dt2*f(x[i], t[n])
+        
+                elif version == 'vectorized':
+                    u[1:-1] = - u_2[1:-1] + 2*u_1[1:-1] + \ 
+                              C2*(u_1[0:-2] - 2*u_1[1:-1] + u_1[2:]) + \ 
+                              dt2*f(x[1:-1], t[n])
+                else:
+                    raise ValueError('version=%s' % version)
+        
+                # Insert boundary conditions
+                i = Ix[0]
+                if U_0 is None:
+                    # Set du/dx = 0
+                    # x=0: i-1 -> i+1 since u[i-1]=u[i+1] when du/dn=0
+                    # x=L: i+1 -> i-1 since u[i+1]=u[i-1] when du/dn=0
+                    ip1 = i+1
+                    im1 = ip1
+                    u[i] = - u_2[i] + 2*u_1[i] + \ 
+                           C2*(u_1[im1] - 2*u_1[i] + u_1[ip1]) + \ 
+                           dt2*f(x[i], t[n])
+                else:
+                    u[0] = U_0(t[n+1])
+        
+                i = Ix[-1]
+                if U_L is None:
+                    im1 = i-1
+                    ip1 = im1
+                    u[i] = - u_2[i] + 2*u_1[i] + \ 
+                           C2*(u_1[im1] - 2*u_1[i] + u_1[ip1]) + \ 
+                           dt2*f(x[i], t[n])
+                else:
+                    u[i] = U_L(t[n+1])
+        
+                if user_action is not None:
+                    if user_action(u, x, t, n+1):
+                        break
+        
+                # Update data structures for next step
+                u_2[:], u_1[:] = u_1, u
+        
+            return u, x, t
+
+Open boundary conditions can be handled as follows.
+
+.. code-block:: python
+
+        def solver(...):
+            ...
+            for n in range(1, Nt):
+                # Update all inner points at time t[n+1]
+        
+                # Insert open boundary conditions at the end points
+                i = Nx
+                u[i] = u_1[i] - C*(u_1[i] - u_1[i-1])
+                i = 0
+                u[i] = u_1[i] + C*(u_1[i+1] - u_1[i])
+
+A period condition at :math:`x=L`, after an open conditon in the beginning
+of the simulation, can be coded as
+
+.. code-block:: python
+
+        if periodic:
+            u[0] = u[Nx]
+        else:
+            i = 0
+            u[i] = u_1[i] + C*(u_1[i+1] - u_1[i])
+
+where ``peridoc`` becomes ``True`` when ``u[-1] > eps`` for some
+tolerance ``eps``, say ``1E-4`` (i.e., the outgoing wave hits the right
+boundary).

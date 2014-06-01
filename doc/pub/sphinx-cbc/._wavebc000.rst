@@ -1,0 +1,21 @@
+.. Automatically generated Sphinx-extended reStructuredText file from Doconce source
+   (https://github.com/hplgit/doconce/)
+
+.. 2DO: Use footnotes, links, citations
+
+.. Maybe a stripped version is fine for education of doconce/latex.
+
+.. Consider if-else of blocks to create the small version.
+
+On the impact of boundary conditions in a wave equation
+=======================================================
+
+:Author: Hans Petter Langtangen
+:Date: Jun 1, 2014
+
+*Summary.* The purpose of this document is to demonstrate how
+different types of boundary conditions impacts the solution of
+standard, linear wave equation in one spatial dimension. Four types of
+conditions are treated: known value (Dirichlet condition), zero flux
+(Neumann condition), open boundary, and periodic boundary.
+

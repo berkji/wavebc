@@ -1,0 +1,347 @@
+<!--
+Automatically generated HTML file from Doconce source
+(https://github.com/hplgit/doconce/)
+-->
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="Doconce: https://github.com/hplgit/doconce/" />
+<meta name="description" content="On the impact of boundary conditions in a wave equation">
+<meta name="keywords" content="Dirichlet boundary condition,boundary condition Dirichlet,$u=0$ boundary condition,boundary condition $u=0$,reflecting boundary condition,no-flux boundary condition,Neumann flux boundary condition,boundary condition Neumann,boundary condition reflecting,boundary condition no-flux,feeding of wave at the boundary,incoming boundary wave,boundary condition feeding of wave,boundary condition incoming wave,open boundary condition,radiation condition,artificial boundary condition,boundary condition open,boundary condition radiation,boundary condition artifical">
+
+
+
+<!-- Bootstrap style: bootswatch_cyborg -->
+<link href="http://netdna.bootstrapcdn.com/bootswatch/3.1.1/cyborg/bootstrap.min.css" rel="stylesheet">
+<!-- not necessary
+<link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+-->
+
+<style type="text/css">
+/* Let inline verbatim have the same color as the surroundings */
+code { color: inherit; background-color: transparent; }
+/* Let pre tags for code blocks have the same color as the surroundings */
+pre { color: inherit; background-color: transparent; }
+</style>
+
+</head>
+
+<!-- tocinfo
+{'highest level': 1,
+ 'sections': [(' Mathematical model and solution method ',
+               1,
+               'sec:math',
+               'sec:math'),
+              (' The wave equation problem ',
+               2,
+               'sec:math:pde',
+               'sec:math:pde'),
+              (' Initial conditions ', 2, 'sec:math:ic', 'sec:math:ic'),
+              (' Boundary conditions ', 2, 'sec:math:bc', 'sec:math:bc'),
+              (' Fixed $u$ ', 3, None, '___sec4'),
+              (' Reflecting condition ', 3, None, '___sec5'),
+              (' Feeding a wave from the boundary ', 3, None, '___sec6'),
+              (' Open boundary condition ', 3, None, '___sec7'),
+              (' Periodic boundary condition ', 3, None, '___sec8'),
+              (' Numerical solution method ', 2, None, '___sec9'),
+              (' Demonstrations ', 1, None, '___sec10'),
+              (' Dirichlet and Neumann conditions: reflecting and mirroring boundaries ',
+               2,
+               None,
+               '___sec11'),
+              (' Numerical noise ', 3, None, '___sec12'),
+              (' Effect of impulsive start of waves ', 2, None, '___sec13'),
+              (' Feeding of waves from the boundary ', 2, None, '___sec14'),
+              (' Open and periodic boundary conditions ',
+               2,
+               None,
+               '___sec15'),
+              (' Error in the open boundary condition ', 3, None, '___sec16'),
+              (' Appendix: Numerical solution method ',
+               1,
+               'sec:app:numerical',
+               'sec:app:numerical'),
+              (' Approximating the wave equation ', 2, None, '___sec18'),
+              (' Approximating the initial conditions ', 2, None, '___sec19'),
+              (' Approximation of boundary conditions ', 2, None, '___sec20'),
+              (' Dirichlet conditions ', 3, None, '___sec21'),
+              (' Neumann conditions ', 3, None, '___sec22'),
+              (' Open boundary conditions ', 3, None, '___sec23'),
+              (' Periodic conditions ', 3, None, '___sec24'),
+              (' Appendix: Computer code ',
+               1,
+               'sec:app:code',
+               'sec:app:code')]}
+end of tocinfo -->
+
+<body>
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: {
+     equationNumbers: {  autoNumber: "none"  },
+     extensions: ["AMSmath.js", "AMSsymbols.js", "autobold.js"]
+  }
+});
+</script>
+<script type="text/javascript"
+ src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<!-- Fix slow MathJax rendering in IE8 -->
+<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7">
+
+
+<!-- newcommands_keep.tex -->
+$$
+\newcommand{\half}{\frac{1}{2}}
+\newcommand{\halfi}{{1/2}}
+\newcommand{\tp}{\thinspace .}
+$$
+
+
+
+
+    
+<!-- Bootstrap navigation bar -->
+<div class="navbar navbar-default navbar-fixed-top">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="wavebc_cyborg.html">On the impact of boundary conditions in a wave equation</a>
+  </div>
+  <div class="navbar-collapse collapse navbar-responsive-collapse">
+    <ul class="nav navbar-nav navbar-right">
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Contents <b class="caret"></b></a>
+        <ul class="dropdown-menu">
+     <!-- navigation toc: "Mathematical model and solution method" --> <li><a href="#sec:math" style="font-size: 80%;"><b>Mathematical model and solution method</b></a></li>
+     <!-- navigation toc: "The wave equation problem" --> <li><a href="#sec:math:pde" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;The wave equation problem</a></li>
+     <!-- navigation toc: "Initial conditions" --> <li><a href="#sec:math:ic" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Initial conditions</a></li>
+     <!-- navigation toc: "Boundary conditions" --> <li><a href="#sec:math:bc" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Boundary conditions</a></li>
+     <!-- navigation toc: "Numerical solution method" --> <li><a href="#___sec9" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Numerical solution method</a></li>
+     <!-- navigation toc: "Demonstrations" --> <li><a href="#___sec10" style="font-size: 80%;"><b>Demonstrations</b></a></li>
+     <!-- navigation toc: "Dirichlet and Neumann conditions: reflecting and mirroring boundaries" --> <li><a href="#___sec11" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Dirichlet and Neumann conditions: reflecting and mirroring boundaries</a></li>
+     <!-- navigation toc: "Effect of impulsive start of waves" --> <li><a href="#___sec13" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Effect of impulsive start of waves</a></li>
+     <!-- navigation toc: "Feeding of waves from the boundary" --> <li><a href="#___sec14" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Feeding of waves from the boundary</a></li>
+     <!-- navigation toc: "Open and periodic boundary conditions" --> <li><a href="#___sec15" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Open and periodic boundary conditions</a></li>
+     <!-- navigation toc: "Appendix: Numerical solution method" --> <li><a href="#sec:app:numerical" style="font-size: 80%;"><b>Appendix: Numerical solution method</b></a></li>
+     <!-- navigation toc: "Approximating the wave equation" --> <li><a href="#___sec18" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Approximating the wave equation</a></li>
+     <!-- navigation toc: "Approximating the initial conditions" --> <li><a href="#___sec19" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Approximating the initial conditions</a></li>
+     <!-- navigation toc: "Approximation of boundary conditions" --> <li><a href="#___sec20" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Approximation of boundary conditions</a></li>
+     <!-- navigation toc: "Appendix: Computer code" --> <li><a href="#sec:app:code" style="font-size: 80%;"><b>Appendix: Computer code</b></a></li>
+
+        </ul>
+      </li>
+    </ul>
+  </div>
+</div>
+</div> <!-- end of navigation bar -->
+
+<div class="container">
+
+<p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p> <!-- add vertical space -->
+
+<a name="part0005"></a>
+<!-- !split -->
+
+<h1>Appendix: Computer code <a name="sec:app:code"></a></h1>
+
+The complete code used for all experiments except those involving
+periodic boundary conditions can be found in
+the file <a href="http://tinyurl.com/jvzzcfn/wave/wave1D/wave1D_dn.py" target="_self"><tt>wave1D_dn.py</tt></a>. The basic solver function for problems without open boundary
+conditions and periodic conditions is listed below.
+
+<p>
+The key computation is the time stepping loop where
+<a href="._wavebc_cyborg004.html#mjx-eqn-6">(6)</a> is used to find new \( u^{n+1}_i \)
+values at each time level. In addition, a special formula for
+the first step is needed, and boundary conditions must be
+incorporated at the boundary points.
+
+<p>
+
+<!-- code=python (from !bc pycod) typeset with pygments style "monokai" -->
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span style="color: #f92672">from</span> <span style="color: #f8f8f2">numpy</span> <span style="color: #f92672">import</span> <span style="color: #f8f8f2">linspace,</span> <span style="color: #f8f8f2">zeros</span>
+
+<span style="color: #66d9ef">def</span> <span style="color: #a6e22e">solver</span><span style="color: #f8f8f2">(I,</span> <span style="color: #f8f8f2">V,</span> <span style="color: #f8f8f2">f,</span> <span style="color: #f8f8f2">c,</span> <span style="color: #f8f8f2">U_0,</span> <span style="color: #f8f8f2">U_L,</span> <span style="color: #f8f8f2">L,</span> <span style="color: #f8f8f2">dt,</span> <span style="color: #f8f8f2">C,</span> <span style="color: #f8f8f2">T,</span>
+           <span style="color: #f8f8f2">user_action</span><span style="color: #f92672">=</span><span style="color: #f8f8f2">None,</span> <span style="color: #f8f8f2">version</span><span style="color: #f92672">=</span><span style="color: #e6db74">&#39;scalar&#39;</span><span style="color: #f8f8f2">):</span>
+    <span style="color: #e6db74">&quot;&quot;&quot;</span>
+<span style="color: #e6db74">    Solve u_tt = c**2*u_xx for x in [0,L] and t in [0,T],</span>
+<span style="color: #e6db74">    with u(x,0)=I(x), u_t(x,t)=V(x), u(0,t)=U_0(t), u(L,t)=U_L(t),</span>
+<span style="color: #e6db74">    and time step size dt and Courant number C.</span>
+<span style="color: #e6db74">    A Neumann condition is applied by setting U_0 or  U_L to None.</span>
+<span style="color: #e6db74">    user_action(u, x, t, n) is called at every time step with</span>
+<span style="color: #e6db74">    time t[n], the solution in array u, and corresponding to x</span>
+<span style="color: #e6db74">    coordinates in array x.</span>
+<span style="color: #e6db74">    &quot;&quot;&quot;</span>
+    <span style="color: #f8f8f2">Nt</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">int(round(T</span><span style="color: #f92672">/</span><span style="color: #f8f8f2">dt))</span>          <span style="color: #75715e"># No of time intervals</span>
+    <span style="color: #f8f8f2">t</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">linspace(</span><span style="color: #ae81ff">0</span><span style="color: #f8f8f2">,</span> <span style="color: #f8f8f2">Nt</span><span style="color: #f92672">*</span><span style="color: #f8f8f2">dt,</span> <span style="color: #f8f8f2">Nt</span><span style="color: #f92672">+</span><span style="color: #ae81ff">1</span><span style="color: #f8f8f2">)</span>   <span style="color: #75715e"># Mesh points in time</span>
+    <span style="color: #f8f8f2">dx</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">dt</span><span style="color: #f92672">*</span><span style="color: #f8f8f2">c</span><span style="color: #f92672">/</span><span style="color: #f8f8f2">float(C)</span>             <span style="color: #75715e"># Mesh spacing</span>
+    <span style="color: #f8f8f2">Nx</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">int(round(L</span><span style="color: #f92672">/</span><span style="color: #f8f8f2">dx))</span>          <span style="color: #75715e"># No of space intervals</span>
+    <span style="color: #f8f8f2">x</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">linspace(</span><span style="color: #ae81ff">0</span><span style="color: #f8f8f2">,</span> <span style="color: #f8f8f2">L,</span> <span style="color: #f8f8f2">Nx</span><span style="color: #f92672">+</span><span style="color: #ae81ff">1</span><span style="color: #f8f8f2">)</span>       <span style="color: #75715e"># Mesh points in space</span>
+
+    <span style="color: #f8f8f2">C2</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">C</span><span style="color: #f92672">**</span><span style="color: #ae81ff">2</span><span style="color: #f8f8f2">;</span> <span style="color: #f8f8f2">dt2</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">dt</span><span style="color: #f92672">*</span><span style="color: #f8f8f2">dt</span>         <span style="color: #75715e"># Help variables in the scheme</span>
+
+    <span style="color: #f8f8f2">u</span>   <span style="color: #f92672">=</span> <span style="color: #f8f8f2">zeros(Nx</span><span style="color: #f92672">+</span><span style="color: #ae81ff">1</span><span style="color: #f8f8f2">)</span>    <span style="color: #75715e"># Solution array at new time level</span>
+    <span style="color: #f8f8f2">u_1</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">zeros(Nx</span><span style="color: #f92672">+</span><span style="color: #ae81ff">1</span><span style="color: #f8f8f2">)</span>    <span style="color: #75715e"># Solution at 1 time level back</span>
+    <span style="color: #f8f8f2">u_2</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">zeros(Nx</span><span style="color: #f92672">+</span><span style="color: #ae81ff">1</span><span style="color: #f8f8f2">)</span>    <span style="color: #75715e"># Solution at 2 time levels back</span>
+
+    <span style="color: #f8f8f2">Ix</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">range(</span><span style="color: #ae81ff">0</span><span style="color: #f8f8f2">,</span> <span style="color: #f8f8f2">Nx</span><span style="color: #f92672">+</span><span style="color: #ae81ff">1</span><span style="color: #f8f8f2">)</span>  <span style="color: #75715e"># Indices for x mesh</span>
+    <span style="color: #f8f8f2">It</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">range(</span><span style="color: #ae81ff">0</span><span style="color: #f8f8f2">,</span> <span style="color: #f8f8f2">Nt</span><span style="color: #f92672">+</span><span style="color: #ae81ff">1</span><span style="color: #f8f8f2">)</span>  <span style="color: #75715e"># Indices for t mesh</span>
+
+    <span style="color: #75715e"># Load initial condition into u_1</span>
+    <span style="color: #66d9ef">for</span> <span style="color: #f8f8f2">i</span> <span style="color: #f92672">in</span> <span style="color: #f8f8f2">Ix:</span>
+        <span style="color: #f8f8f2">u_1[i]</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">I(x[i])</span>
+
+    <span style="color: #66d9ef">if</span> <span style="color: #f8f8f2">user_action</span> <span style="color: #f92672">is</span> <span style="color: #f92672">not</span> <span style="color: #f8f8f2">None:</span>
+        <span style="color: #f8f8f2">user_action(u_1,</span> <span style="color: #f8f8f2">x,</span> <span style="color: #f8f8f2">t,</span> <span style="color: #ae81ff">0</span><span style="color: #f8f8f2">)</span>
+
+    <span style="color: #75715e"># Special formula for the first step</span>
+    <span style="color: #66d9ef">for</span> <span style="color: #f8f8f2">i</span> <span style="color: #f92672">in</span> <span style="color: #f8f8f2">Ix[</span><span style="color: #ae81ff">1</span><span style="color: #f8f8f2">:</span><span style="color: #f92672">-</span><span style="color: #ae81ff">1</span><span style="color: #f8f8f2">]:</span>
+        <span style="color: #f8f8f2">u[i]</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">u_1[i]</span> <span style="color: #f92672">+</span> <span style="color: #f8f8f2">dt</span><span style="color: #f92672">*</span><span style="color: #f8f8f2">V(x[i])</span> <span style="color: #f92672">+</span> \ 
+               <span style="color: #ae81ff">0.5</span><span style="color: #f92672">*</span><span style="color: #f8f8f2">C2</span><span style="color: #f92672">*</span><span style="color: #f8f8f2">(u_1[i</span><span style="color: #f92672">-</span><span style="color: #ae81ff">1</span><span style="color: #f8f8f2">]</span> <span style="color: #f92672">-</span> <span style="color: #ae81ff">2</span><span style="color: #f92672">*</span><span style="color: #f8f8f2">u_1[i]</span> <span style="color: #f92672">+</span> <span style="color: #f8f8f2">u_1[i</span><span style="color: #f92672">+</span><span style="color: #ae81ff">1</span><span style="color: #f8f8f2">])</span> <span style="color: #f92672">+</span> \ 
+               <span style="color: #ae81ff">0.5</span><span style="color: #f92672">*</span><span style="color: #f8f8f2">dt2</span><span style="color: #f92672">*</span><span style="color: #f8f8f2">f(x[i],</span> <span style="color: #f8f8f2">t[</span><span style="color: #ae81ff">0</span><span style="color: #f8f8f2">])</span>
+
+    <span style="color: #f8f8f2">i</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">Ix[</span><span style="color: #ae81ff">0</span><span style="color: #f8f8f2">]</span>
+    <span style="color: #66d9ef">if</span> <span style="color: #f8f8f2">U_0</span> <span style="color: #f92672">is</span> <span style="color: #f8f8f2">None:</span>
+        <span style="color: #75715e"># Set boundary values du/dn = 0</span>
+        <span style="color: #75715e"># x=0: i-1 -&gt; i+1 since u[i-1]=u[i+1]</span>
+        <span style="color: #75715e"># x=L: i+1 -&gt; i-1 since u[i+1]=u[i-1])</span>
+        <span style="color: #f8f8f2">ip1</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">i</span><span style="color: #f92672">+</span><span style="color: #ae81ff">1</span>
+        <span style="color: #f8f8f2">im1</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">ip1</span>  <span style="color: #75715e"># i-1 -&gt; i+1</span>
+        <span style="color: #f8f8f2">u[i]</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">u_1[i]</span> <span style="color: #f92672">+</span> <span style="color: #f8f8f2">dt</span><span style="color: #f92672">*</span><span style="color: #f8f8f2">V(x[i])</span> <span style="color: #f92672">+</span> \ 
+               <span style="color: #ae81ff">0.5</span><span style="color: #f92672">*</span><span style="color: #f8f8f2">C2</span><span style="color: #f92672">*</span><span style="color: #f8f8f2">(u_1[im1]</span> <span style="color: #f92672">-</span> <span style="color: #ae81ff">2</span><span style="color: #f92672">*</span><span style="color: #f8f8f2">u_1[i]</span> <span style="color: #f92672">+</span> <span style="color: #f8f8f2">u_1[ip1])</span> <span style="color: #f92672">+</span> \ 
+               <span style="color: #ae81ff">0.5</span><span style="color: #f92672">*</span><span style="color: #f8f8f2">dt2</span><span style="color: #f92672">*</span><span style="color: #f8f8f2">f(x[i],</span> <span style="color: #f8f8f2">t[</span><span style="color: #ae81ff">0</span><span style="color: #f8f8f2">])</span>
+    <span style="color: #66d9ef">else</span><span style="color: #f8f8f2">:</span>
+        <span style="color: #f8f8f2">u[</span><span style="color: #ae81ff">0</span><span style="color: #f8f8f2">]</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">U_0(dt)</span>
+
+    <span style="color: #f8f8f2">i</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">Ix[</span><span style="color: #f92672">-</span><span style="color: #ae81ff">1</span><span style="color: #f8f8f2">]</span>
+    <span style="color: #66d9ef">if</span> <span style="color: #f8f8f2">U_L</span> <span style="color: #f92672">is</span> <span style="color: #f8f8f2">None:</span>
+        <span style="color: #f8f8f2">im1</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">i</span><span style="color: #f92672">-</span><span style="color: #ae81ff">1</span>
+        <span style="color: #f8f8f2">ip1</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">im1</span>  <span style="color: #75715e"># i+1 -&gt; i-1</span>
+        <span style="color: #f8f8f2">u[i]</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">u_1[i]</span> <span style="color: #f92672">+</span> <span style="color: #f8f8f2">dt</span><span style="color: #f92672">*</span><span style="color: #f8f8f2">V(x[i])</span> <span style="color: #f92672">+</span> \ 
+               <span style="color: #ae81ff">0.5</span><span style="color: #f92672">*</span><span style="color: #f8f8f2">C2</span><span style="color: #f92672">*</span><span style="color: #f8f8f2">(u_1[im1]</span> <span style="color: #f92672">-</span> <span style="color: #ae81ff">2</span><span style="color: #f92672">*</span><span style="color: #f8f8f2">u_1[i]</span> <span style="color: #f92672">+</span> <span style="color: #f8f8f2">u_1[ip1])</span> <span style="color: #f92672">+</span> \ 
+               <span style="color: #ae81ff">0.5</span><span style="color: #f92672">*</span><span style="color: #f8f8f2">dt2</span><span style="color: #f92672">*</span><span style="color: #f8f8f2">f(x[i],</span> <span style="color: #f8f8f2">t[</span><span style="color: #ae81ff">0</span><span style="color: #f8f8f2">])</span>
+    <span style="color: #66d9ef">else</span><span style="color: #f8f8f2">:</span>
+        <span style="color: #f8f8f2">u[i]</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">U_L(dt)</span>
+
+    <span style="color: #66d9ef">if</span> <span style="color: #f8f8f2">user_action</span> <span style="color: #f92672">is</span> <span style="color: #f92672">not</span> <span style="color: #f8f8f2">None:</span>
+        <span style="color: #f8f8f2">user_action(u,</span> <span style="color: #f8f8f2">x,</span> <span style="color: #f8f8f2">t,</span> <span style="color: #ae81ff">1</span><span style="color: #f8f8f2">)</span>
+
+    <span style="color: #75715e"># Update data structures for next step</span>
+    <span style="color: #f8f8f2">u_2[:],</span> <span style="color: #f8f8f2">u_1[:]</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">u_1,</span> <span style="color: #f8f8f2">u</span>
+
+    <span style="color: #66d9ef">for</span> <span style="color: #f8f8f2">n</span> <span style="color: #f92672">in</span> <span style="color: #f8f8f2">It[</span><span style="color: #ae81ff">1</span><span style="color: #f8f8f2">:</span><span style="color: #f92672">-</span><span style="color: #ae81ff">1</span><span style="color: #f8f8f2">]:</span>
+        <span style="color: #75715e"># Update all inner points</span>
+        <span style="color: #66d9ef">if</span> <span style="color: #f8f8f2">version</span> <span style="color: #f92672">==</span> <span style="color: #e6db74">&#39;scalar&#39;</span><span style="color: #f8f8f2">:</span>
+            <span style="color: #66d9ef">for</span> <span style="color: #f8f8f2">i</span> <span style="color: #f92672">in</span> <span style="color: #f8f8f2">Ix[</span><span style="color: #ae81ff">1</span><span style="color: #f8f8f2">:</span><span style="color: #f92672">-</span><span style="color: #ae81ff">1</span><span style="color: #f8f8f2">]:</span>
+                <span style="color: #f8f8f2">u[i]</span> <span style="color: #f92672">=</span> <span style="color: #f92672">-</span> <span style="color: #f8f8f2">u_2[i]</span> <span style="color: #f92672">+</span> <span style="color: #ae81ff">2</span><span style="color: #f92672">*</span><span style="color: #f8f8f2">u_1[i]</span> <span style="color: #f92672">+</span> \ 
+                       <span style="color: #f8f8f2">C2</span><span style="color: #f92672">*</span><span style="color: #f8f8f2">(u_1[i</span><span style="color: #f92672">-</span><span style="color: #ae81ff">1</span><span style="color: #f8f8f2">]</span> <span style="color: #f92672">-</span> <span style="color: #ae81ff">2</span><span style="color: #f92672">*</span><span style="color: #f8f8f2">u_1[i]</span> <span style="color: #f92672">+</span> <span style="color: #f8f8f2">u_1[i</span><span style="color: #f92672">+</span><span style="color: #ae81ff">1</span><span style="color: #f8f8f2">])</span> <span style="color: #f92672">+</span> \ 
+                       <span style="color: #f8f8f2">dt2</span><span style="color: #f92672">*</span><span style="color: #f8f8f2">f(x[i],</span> <span style="color: #f8f8f2">t[n])</span>
+
+        <span style="color: #66d9ef">elif</span> <span style="color: #f8f8f2">version</span> <span style="color: #f92672">==</span> <span style="color: #e6db74">&#39;vectorized&#39;</span><span style="color: #f8f8f2">:</span>
+            <span style="color: #f8f8f2">u[</span><span style="color: #ae81ff">1</span><span style="color: #f8f8f2">:</span><span style="color: #f92672">-</span><span style="color: #ae81ff">1</span><span style="color: #f8f8f2">]</span> <span style="color: #f92672">=</span> <span style="color: #f92672">-</span> <span style="color: #f8f8f2">u_2[</span><span style="color: #ae81ff">1</span><span style="color: #f8f8f2">:</span><span style="color: #f92672">-</span><span style="color: #ae81ff">1</span><span style="color: #f8f8f2">]</span> <span style="color: #f92672">+</span> <span style="color: #ae81ff">2</span><span style="color: #f92672">*</span><span style="color: #f8f8f2">u_1[</span><span style="color: #ae81ff">1</span><span style="color: #f8f8f2">:</span><span style="color: #f92672">-</span><span style="color: #ae81ff">1</span><span style="color: #f8f8f2">]</span> <span style="color: #f92672">+</span> \ 
+                      <span style="color: #f8f8f2">C2</span><span style="color: #f92672">*</span><span style="color: #f8f8f2">(u_1[</span><span style="color: #ae81ff">0</span><span style="color: #f8f8f2">:</span><span style="color: #f92672">-</span><span style="color: #ae81ff">2</span><span style="color: #f8f8f2">]</span> <span style="color: #f92672">-</span> <span style="color: #ae81ff">2</span><span style="color: #f92672">*</span><span style="color: #f8f8f2">u_1[</span><span style="color: #ae81ff">1</span><span style="color: #f8f8f2">:</span><span style="color: #f92672">-</span><span style="color: #ae81ff">1</span><span style="color: #f8f8f2">]</span> <span style="color: #f92672">+</span> <span style="color: #f8f8f2">u_1[</span><span style="color: #ae81ff">2</span><span style="color: #f8f8f2">:])</span> <span style="color: #f92672">+</span> \ 
+                      <span style="color: #f8f8f2">dt2</span><span style="color: #f92672">*</span><span style="color: #f8f8f2">f(x[</span><span style="color: #ae81ff">1</span><span style="color: #f8f8f2">:</span><span style="color: #f92672">-</span><span style="color: #ae81ff">1</span><span style="color: #f8f8f2">],</span> <span style="color: #f8f8f2">t[n])</span>
+        <span style="color: #66d9ef">else</span><span style="color: #f8f8f2">:</span>
+            <span style="color: #66d9ef">raise</span> <span style="color: #a6e22e">ValueError</span><span style="color: #f8f8f2">(</span><span style="color: #e6db74">&#39;version=%s&#39;</span> <span style="color: #f92672">%</span> <span style="color: #f8f8f2">version)</span>
+
+        <span style="color: #75715e"># Insert boundary conditions</span>
+        <span style="color: #f8f8f2">i</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">Ix[</span><span style="color: #ae81ff">0</span><span style="color: #f8f8f2">]</span>
+        <span style="color: #66d9ef">if</span> <span style="color: #f8f8f2">U_0</span> <span style="color: #f92672">is</span> <span style="color: #f8f8f2">None:</span>
+            <span style="color: #75715e"># Set du/dx = 0</span>
+            <span style="color: #75715e"># x=0: i-1 -&gt; i+1 since u[i-1]=u[i+1] when du/dn=0</span>
+            <span style="color: #75715e"># x=L: i+1 -&gt; i-1 since u[i+1]=u[i-1] when du/dn=0</span>
+            <span style="color: #f8f8f2">ip1</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">i</span><span style="color: #f92672">+</span><span style="color: #ae81ff">1</span>
+            <span style="color: #f8f8f2">im1</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">ip1</span>
+            <span style="color: #f8f8f2">u[i]</span> <span style="color: #f92672">=</span> <span style="color: #f92672">-</span> <span style="color: #f8f8f2">u_2[i]</span> <span style="color: #f92672">+</span> <span style="color: #ae81ff">2</span><span style="color: #f92672">*</span><span style="color: #f8f8f2">u_1[i]</span> <span style="color: #f92672">+</span> \ 
+                   <span style="color: #f8f8f2">C2</span><span style="color: #f92672">*</span><span style="color: #f8f8f2">(u_1[im1]</span> <span style="color: #f92672">-</span> <span style="color: #ae81ff">2</span><span style="color: #f92672">*</span><span style="color: #f8f8f2">u_1[i]</span> <span style="color: #f92672">+</span> <span style="color: #f8f8f2">u_1[ip1])</span> <span style="color: #f92672">+</span> \ 
+                   <span style="color: #f8f8f2">dt2</span><span style="color: #f92672">*</span><span style="color: #f8f8f2">f(x[i],</span> <span style="color: #f8f8f2">t[n])</span>
+        <span style="color: #66d9ef">else</span><span style="color: #f8f8f2">:</span>
+            <span style="color: #f8f8f2">u[</span><span style="color: #ae81ff">0</span><span style="color: #f8f8f2">]</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">U_0(t[n</span><span style="color: #f92672">+</span><span style="color: #ae81ff">1</span><span style="color: #f8f8f2">])</span>
+
+        <span style="color: #f8f8f2">i</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">Ix[</span><span style="color: #f92672">-</span><span style="color: #ae81ff">1</span><span style="color: #f8f8f2">]</span>
+        <span style="color: #66d9ef">if</span> <span style="color: #f8f8f2">U_L</span> <span style="color: #f92672">is</span> <span style="color: #f8f8f2">None:</span>
+            <span style="color: #f8f8f2">im1</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">i</span><span style="color: #f92672">-</span><span style="color: #ae81ff">1</span>
+            <span style="color: #f8f8f2">ip1</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">im1</span>
+            <span style="color: #f8f8f2">u[i]</span> <span style="color: #f92672">=</span> <span style="color: #f92672">-</span> <span style="color: #f8f8f2">u_2[i]</span> <span style="color: #f92672">+</span> <span style="color: #ae81ff">2</span><span style="color: #f92672">*</span><span style="color: #f8f8f2">u_1[i]</span> <span style="color: #f92672">+</span> \ 
+                   <span style="color: #f8f8f2">C2</span><span style="color: #f92672">*</span><span style="color: #f8f8f2">(u_1[im1]</span> <span style="color: #f92672">-</span> <span style="color: #ae81ff">2</span><span style="color: #f92672">*</span><span style="color: #f8f8f2">u_1[i]</span> <span style="color: #f92672">+</span> <span style="color: #f8f8f2">u_1[ip1])</span> <span style="color: #f92672">+</span> \ 
+                   <span style="color: #f8f8f2">dt2</span><span style="color: #f92672">*</span><span style="color: #f8f8f2">f(x[i],</span> <span style="color: #f8f8f2">t[n])</span>
+        <span style="color: #66d9ef">else</span><span style="color: #f8f8f2">:</span>
+            <span style="color: #f8f8f2">u[i]</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">U_L(t[n</span><span style="color: #f92672">+</span><span style="color: #ae81ff">1</span><span style="color: #f8f8f2">])</span>
+
+        <span style="color: #66d9ef">if</span> <span style="color: #f8f8f2">user_action</span> <span style="color: #f92672">is</span> <span style="color: #f92672">not</span> <span style="color: #f8f8f2">None:</span>
+            <span style="color: #66d9ef">if</span> <span style="color: #f8f8f2">user_action(u,</span> <span style="color: #f8f8f2">x,</span> <span style="color: #f8f8f2">t,</span> <span style="color: #f8f8f2">n</span><span style="color: #f92672">+</span><span style="color: #ae81ff">1</span><span style="color: #f8f8f2">):</span>
+                <span style="color: #66d9ef">break</span>
+
+        <span style="color: #75715e"># Update data structures for next step</span>
+        <span style="color: #f8f8f2">u_2[:],</span> <span style="color: #f8f8f2">u_1[:]</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">u_1,</span> <span style="color: #f8f8f2">u</span>
+
+    <span style="color: #66d9ef">return</span> <span style="color: #f8f8f2">u,</span> <span style="color: #f8f8f2">x,</span> <span style="color: #f8f8f2">t</span>
+</pre></div>
+<p>
+Open boundary conditions can be handled as follows.
+
+<p>
+
+<!-- code=python (from !bc pycod) typeset with pygments style "monokai" -->
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span style="color: #66d9ef">def</span> <span style="color: #a6e22e">solver</span><span style="color: #f8f8f2">(</span><span style="color: #f92672">...</span><span style="color: #f8f8f2">):</span>
+    <span style="color: #f92672">...</span>
+    <span style="color: #66d9ef">for</span> <span style="color: #f8f8f2">n</span> <span style="color: #f92672">in</span> <span style="color: #f8f8f2">range(</span><span style="color: #ae81ff">1</span><span style="color: #f8f8f2">,</span> <span style="color: #f8f8f2">Nt):</span>
+        <span style="color: #75715e"># Update all inner points at time t[n+1]</span>
+
+        <span style="color: #75715e"># Insert open boundary conditions at the end points</span>
+        <span style="color: #f8f8f2">i</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">Nx</span>
+        <span style="color: #f8f8f2">u[i]</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">u_1[i]</span> <span style="color: #f92672">-</span> <span style="color: #f8f8f2">C</span><span style="color: #f92672">*</span><span style="color: #f8f8f2">(u_1[i]</span> <span style="color: #f92672">-</span> <span style="color: #f8f8f2">u_1[i</span><span style="color: #f92672">-</span><span style="color: #ae81ff">1</span><span style="color: #f8f8f2">])</span>
+        <span style="color: #f8f8f2">i</span> <span style="color: #f92672">=</span> <span style="color: #ae81ff">0</span>
+        <span style="color: #f8f8f2">u[i]</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">u_1[i]</span> <span style="color: #f92672">+</span> <span style="color: #f8f8f2">C</span><span style="color: #f92672">*</span><span style="color: #f8f8f2">(u_1[i</span><span style="color: #f92672">+</span><span style="color: #ae81ff">1</span><span style="color: #f8f8f2">]</span> <span style="color: #f92672">-</span> <span style="color: #f8f8f2">u_1[i])</span>
+</pre></div>
+<p>
+A period condition at \( x=L \), after an open conditon in the beginning
+of the simulation, can be coded as
+
+<p>
+
+<!-- code=python (from !bc pycod) typeset with pygments style "monokai" -->
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span style="color: #66d9ef">if</span> <span style="color: #f8f8f2">periodic:</span>
+    <span style="color: #f8f8f2">u[</span><span style="color: #ae81ff">0</span><span style="color: #f8f8f2">]</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">u[Nx]</span>
+<span style="color: #66d9ef">else</span><span style="color: #f8f8f2">:</span>
+    <span style="color: #f8f8f2">i</span> <span style="color: #f92672">=</span> <span style="color: #ae81ff">0</span>
+    <span style="color: #f8f8f2">u[i]</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">u_1[i]</span> <span style="color: #f92672">+</span> <span style="color: #f8f8f2">C</span><span style="color: #f92672">*</span><span style="color: #f8f8f2">(u_1[i</span><span style="color: #f92672">+</span><span style="color: #ae81ff">1</span><span style="color: #f8f8f2">]</span> <span style="color: #f92672">-</span> <span style="color: #f8f8f2">u_1[i])</span>
+</pre></div>
+<p>
+where <code>peridoc</code> becomes <code>True</code> when <code>u[-1] > eps</code> for some
+tolerance <code>eps</code>, say <code>1E-4</code> (i.e., the outgoing wave hits the right
+boundary).
+
+<p>
+<ul class="pager">
+  <li class="previous">
+    <a href="._wavebc_cyborg004.html">&larr; Prev</a>
+  </li>
+
+
+</ul>
+<!-- ------------------- end of main content --------------- -->
+
+</div>  <!-- end container -->
+<!-- include javascript, jQuery *first* -->
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+
+<!-- Bootstrap footer
+<footer>
+<a href="http://..."><img width="250" align=right src="http://..."></a>
+</footer>
+-->
+
+
+</body>
+</html>
+    
+

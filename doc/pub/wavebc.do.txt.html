@@ -1,0 +1,460 @@
+<div class="highlight" style="background: #eeeedd"><pre style="line-height: 125%"><span style="color: #228B22"># 2DO: Use footnotes, links, citations</span>
+<span style="color: #228B22"># Maybe a stripped version is fine for education of doconce/latex.</span>
+<span style="color: #228B22"># Consider if-else of blocks to create the small version.</span>
+
+<span style="color: #000080; font-weight: bold">TITLE: On the impact of boundary conditions in a wave equation</span>
+<span style="color: #000080; font-weight: bold">AUTHOR:</span> Hans Petter Langtangen at Center for Biomedical Computing, Simula Research Laboratory &amp; Department of Informatics, University of Oslo
+<span style="color: #000080; font-weight: bold">DATE:</span> today
+
+<span style="color: #800080; font-weight: bold">__Summary.__</span> The purpose of this document is to demonstrate how
+different types of boundary conditions impacts the solution of
+standard, linear wave equation in one spatial dimension. Four types of
+conditions are treated: known value (Dirichlet condition), zero flux
+(Neumann condition), open boundary, and periodic boundary.
+
+<span style="color: #228B22"># #if FORMAT != &quot;sphinx&quot;</span>
+<span style="color: #228B22"># Sphinx shows no table of contents (TOC) so two splits create an empty page</span>
+<span style="color: #8B008B; font-weight: bold">!split</span>
+<span style="color: #228B22"># #endif</span>
+
+<span style="color: #000080; font-weight: bold">TOC:</span> on
+
+<span style="color: #8B008B; font-weight: bold">!split</span>
+<span style="color: #000080; font-weight: bold">======= Mathematical model and solution method =======</span>
+<span style="color: #658b00">label{sec:math}</span>
+
+We solve a one-dimensional, linear, constant-coefficient
+wave equation by an explicit finite difference method.
+
+<span style="color: #000080; font-weight: bold">===== The wave equation problem =====</span>
+<span style="color: #658b00">label{sec:math:pde}</span>
+
+The standard, linear wave equation in a homogeneous one-dimensional
+medium reads
+
+<span style="color: #8B008B; font-weight: bold">!bt</span>
+<span style="color: #658b00">\begin{equation}</span>
+\frac{\partial^2 u}{\partial t^2} =
+c^2 \frac{\partial^2 u}{\partial x^2}, \quad x\in (0,L),\ t\in (0,T]\tp
+<span style="color: #658b00">label{math:pde:wave:eq}</span>
+<span style="color: #658b00">\end{equation}</span>
+<span style="color: #8B008B; font-weight: bold">!et</span>
+The unknown function $u$ depends on space $x$ and time $t$: $u=u(x,t)$.
+
+<span style="color: #8B008B; font-weight: bold">!bnotice</span> The need for boundary conditions in the wave equation
+Four initial and boundary conditions must be specified to have a
+unique solution:
+
+ * Initial condition for $u(x,0)$
+ * Initial condition for $u_t(x,0)$
+ * Boundary condition at $x=0$
+ * Boundary condition at $x=L$
+<span style="color: #8B008B; font-weight: bold">!enotice</span>
+
+<span style="color: #000080; font-weight: bold">===== Initial conditions =====</span>
+<span style="color: #658b00">label{sec:math:ic}</span>
+
+
+Most demonstrations will start with an initial profile of $u$,
+
+<span style="color: #8B008B; font-weight: bold">!bt</span>
+\[ u(x,0) = I(x), \]
+<span style="color: #8B008B; font-weight: bold">!et</span>
+being at rest, i.e.,
+
+<span style="color: #8B008B; font-weight: bold">!bt</span>
+\[ \frac{\partial}{\partial t}u(x,0) = 0\tp \]
+<span style="color: #8B008B; font-weight: bold">!et</span>
+Two initial profiles will be considered:
+
+ * a plug as to left in Figure ref{fig:Gaussian}
+ * a Gaussian peak as to the right in Figure ref{fig:Gaussian}
+
+<span style="color: #658b00">FIGURE: [fig-wavebc/plug_Gaussian, width=800 frac=1] Examples on initial conditions. label{fig:Gaussian}</span>
+
+
+<span style="color: #000080; font-weight: bold">===== Boundary conditions =====</span>
+<span style="color: #658b00">label{sec:math:bc}</span>
+
+<span style="color: #658b00">idx{Dirichlet boundary condition}</span>
+<span style="color: #658b00">idx{boundary condition!Dirichlet}</span>
+<span style="color: #658b00">idx{$u=0$ boundary condition}</span>
+<span style="color: #658b00">idx{boundary condition!$u=0$}</span>
+
+<span style="color: #000080; font-weight: bold">=== Fixed $u$ ===</span>
+
+At $x=0$ we will sometimes use the condition $u=0$, often known as
+a homogeneous *Dirichlet* condition. This condition will
+mirror the wave.
+
+<span style="color: #658b00">idx{reflecting boundary condition}</span>
+<span style="color: #658b00">idx{no-flux boundary condition}</span>
+<span style="color: #658b00">idx{Neumann flux boundary condition}</span>
+<span style="color: #658b00">idx{boundary condition!Neumann}</span>
+<span style="color: #658b00">idx{boundary condition!reflecting}</span>
+<span style="color: #658b00">idx{boundary condition!no-flux}</span>
+
+<span style="color: #000080; font-weight: bold">=== Reflecting condition ===</span>
+
+At $x=0$ and/or $x=L$ we will apply a *reflecting* or *no-flux* condition:
+
+<span style="color: #8B008B; font-weight: bold">!bt</span>
+<span style="color: #658b00">\begin{equation}</span> \frac{\partial u}{\partial x}=0\tp
+<span style="color: #658b00">label{sec:math:bc:dudn0}</span>
+<span style="color: #658b00">\end{equation}</span>
+<span style="color: #8B008B; font-weight: bold">!et</span>
+This condition reflects the wave into the domain again, as a surface wave
+hits a vertical wave, runs up to the double amplitude, and propagates
+back into the domain again. This type of boundary condition is also
+referred to as a *Neumann* condition.
+
+<span style="color: #658b00">idx{feeding of wave at the boundary}</span>
+<span style="color: #658b00">idx{incoming boundary wave}</span>
+<span style="color: #658b00">idx{boundary condition!feeding of wave}</span>
+<span style="color: #658b00">idx{boundary condition!incoming wave}</span>
+
+<span style="color: #000080; font-weight: bold">=== Feeding a wave from the boundary ===</span>
+
+We shall demonstrate the effect of moving $u$ at the boundary $x=0$ to
+feed the domain with an incoming wave. The boundary condition then reads
+
+<span style="color: #8B008B; font-weight: bold">!bt</span>
+\[ u(0,t) = U_0(t),\]
+<span style="color: #8B008B; font-weight: bold">!et</span>
+for some given function $U_0(t)$. A particular choice in a later
+demonstration is a sine function that is active in three different
+time intervals:
+
+<span style="color: #8B008B; font-weight: bold">!bt</span>
+\[ U_0 (t) = \left\lbrace\begin{array}{ll}
+\frac{1}{4}\sin(6\pi t),&amp; t\in T_1\hbox{ or } t\in T_2\hbox{ or } t\in T_3\\
+0,&amp; \hbox{otherwise}
+<span style="color: #658b00">\end{array}</span>\right.
+\]
+<span style="color: #8B008B; font-weight: bold">!et</span>
+where $T_1=[0, \frac{1}{6}]$, $T_2=[\frac{3}{4}, \frac{5}{6}]$,
+and $T_3=[\frac{3}{2},\frac{11}{6}]$. The movement of $u$ at the
+boundary will produce a wave that is by the PDE transported to
+the right into the domain.
+
+<span style="color: #658b00">idx{open boundary condition}</span>
+<span style="color: #658b00">idx{radiation condition}</span>
+<span style="color: #658b00">idx{artificial boundary condition}</span>
+<span style="color: #658b00">idx{boundary condition!open}</span>
+<span style="color: #658b00">idx{boundary condition!radiation}</span>
+<span style="color: #658b00">idx{boundary condition!artifical}</span>
+
+<span style="color: #000080; font-weight: bold">=== Open boundary condition ===</span>
+
+Very often one wants to let a wave travel through the boundary without
+being disturbed. Such a condition is called an *open* boundary condition,
+or a *radiation* condition, or an *artificial* boundary condition:
+
+<span style="color: #8B008B; font-weight: bold">!bt</span>
+<span style="color: #658b00">\begin{align}</span>
+\frac{\partial u}{\partial t} - c\frac{\partial u}{\partial x} &amp;= 0,\quad x=0,
+<span style="color: #658b00">label{sec:math:bc:open:x0}</span>\\
+\frac{\partial u}{\partial t} + c\frac{\partial u}{\partial x} &amp;= 0,\quad x=L\tp
+<span style="color: #658b00">label{sec:math:bc:open:xL}</span>
+<span style="color: #658b00">\end{align}</span>
+<span style="color: #8B008B; font-weight: bold">!et</span>
+These conditions work exactly in 1D, but are challenging to generalize
+and implement in 2D and 3D.
+
+<span style="color: #000080; font-weight: bold">=== Periodic boundary condition ===</span>
+
+When following a wave motion over large distances, it is desireable to
+let a wave travel out of the right domain
+and at the same time feed the wave back into the domain from the left.
+This approach avoids a very large domain where nothing happens in
+the majority of the domain. A *periodic* boundary condition at $x=0$
+can be used to feed the signal traveling out at $x=L$ into the domain:
+
+<span style="color: #8B008B; font-weight: bold">!bt</span>
+<span style="color: #658b00">\begin{equation}</span>
+u(0,t) = u(L,t)\tp
+<span style="color: #658b00">label{sec:math:bc:periodic}</span>
+<span style="color: #658b00">\end{equation}</span>
+<span style="color: #8B008B; font-weight: bold">!et</span>
+The condition at $x=L$ is then an open boundary condition
+(ref{sec:math:bc:open:xL}).
+
+<span style="color: #000080; font-weight: bold">===== Numerical solution method =====</span>
+
+The wave equation is solved by an explicit finite difference method,
+which is of second-order in space and time. A uniform mesh with
+spacing $\Delta x$ and $\Delta t$ is used in space and time,
+respectively. The no-flux or Neumann boundary conditions are implemented
+by modifying the computational stencil at the boundary. The
+open boundary conditions are implemented by forward in time,
+upstream in space finite differences, which exactly let the wave out
+of the boundary. More details are found in Appendix ref{sec:app:numerical}.
+Parts of the computer code are explained in
+Appendix ref{sec:app:code}.
+
+<span style="color: #8B008B; font-weight: bold">!split</span>
+<span style="color: #000080; font-weight: bold">======= Demonstrations =======</span>
+
+<span style="color: #000080; font-weight: bold">===== Dirichlet and Neumann conditions: reflecting and mirroring boundaries =====</span>
+
+The first two animations demonstrates the differences between a
+Dirichlet condition $u=0$ at the boundary and a Neumann condition
+$\partial u/\partial x=0$.
+
+<span style="color: #658b00">MOVIE: [mov-wavebc/gaussian_Nx50_C1_un0/movie.mp4] Reflecting boundaries ($u_x=0$) for a Gaussian wave.</span>
+
+<span style="color: #658b00">MOVIE: [mov-wavebc/gaussian_Nx50_C1_u0/movie.mp4] Mirroring boundaries ($u=0$) for a Gaussian wave.</span>
+
+Instead of a Gaussian wave profile, we can test the geometrically simple
+plug profile.
+
+<span style="color: #658b00">MOVIE: [mov-wavebc/plug_Nx100_C1/movie.mp4]</span>
+
+<span style="color: #000080; font-weight: bold">=== Numerical noise ===</span>
+
+All of the above computations were run with unit Courant number, which
+means that the solutions are exact without any numerical errors. (This
+is a remarkable property of the numerical solution method.)
+For smaller Courant numbers, numerical noise may be visible, depending
+on the smoothness of the initial profile.
+Below is a smooth Gaussian profile and the almost discontinuous plug profile.
+
+<span style="color: #658b00">MOVIE: [mov-wavebc/gaussian_Nx50_C0.5_un0/frame*.png] Reflecting boundaries ($u_x=0$) for a Gaussian wave, computed with $C=0.5$, which implies numerical noise on a coarse grid.</span>
+
+<span style="color: #658b00">MOVIE: [mov-wavebc/plug_Nx100_C0.5/frame*.png] A plug wave generates very significant numerical noise ($C=0.5$).</span>
+
+<span style="color: #000080; font-weight: bold">===== Effect of impulsive start of waves =====</span>
+
+The previous demonstrations had an initial condition with a prescribed
+$u=0$ profile at rest ($u_t=0$). Alternatively, one may start with
+a flat profile $u=0$ and use an initial condition $u_t=V\neq 0$ to
+impulsively start the wave motion. For example, if we think of $u$
+as the displacement of a string on a string instrument, this set of
+initial conditions corresponds to an undeformed string that is given
+an impulsive start from an impact.
+
+<span style="color: #658b00">MOVIE:[mov-wavebc/gaussian_Nx50_C1_V/movie.mp4] Impulsive start of a wave motion: $I=0$, $V\neq 0$.</span>
+
+<span style="color: #000080; font-weight: bold">===== Feeding of waves from the boundary =====</span>
+
+We can also start with a flat profile, $u=0$, at rest, $u_t=0$, and
+create propagating signals by moving $u$ at the boundary. That is,
+we have a time-varying Dirichlet condition $u(0,t)=U_0(t)$ at the
+left boundary. The movements lead to signals that propagate to the
+right. In the movie, the movements are paused to make separate
+signals.
+
+<span style="color: #228B22">#MOVIE: [mov-wavebc/moving_end_Nx100_C1/movie.mp4] Feeding of waves from the boundary by a time-dependent Dirichlet condition $U_0(t)$.</span>
+
+<span style="color: #658b00">MOVIE: [https://www.youtube.com/watch?v=-oe8q83anXE] Feeding of waves from the boundary by a time-dependent Dirichlet condition $U_0(t)$.</span>
+
+<span style="color: #000080; font-weight: bold">===== Open and periodic boundary conditions =====</span>
+
+<span style="color: #658b00">MOVIE: [mov-wavebc/periodic_Nx100_C1_l0/movie.mp4] Demonstrations of periodic boundary condition on the left combined with an open boundary condition on the right: waves passing out of the domain enter the left end again.</span>
+
+<span style="color: #658b00">MOVIE: [mov-wavebc/periodic_Nx100_C1_l0.3/movie.mp4] Demonstrations of periodic boundary condition on the left combined with an open boundary condition on the right: waves passing out of the domain enter the left end again.</span>
+
+<span style="color: #000080; font-weight: bold">=== Error in the open boundary condition ===</span>
+
+In 2D and 3D...
+
+<span style="color: #658b00">MOVIE: [mov-wavebc/periodic_error_Nx100_C1_l0.3/movie.mp4] Periodic boundary condition combined with a slight wrong open boundary condition at the right end (20% wrong wave velocity leads to small reflections back into the domain).</span>
+
+<span style="color: #228B22">## Note: Must have blank line after !bsummary and before !esummary</span>
+
+<span style="color: #8B008B; font-weight: bold">!bsummary</span> Summary of boundary conditions
+
+<span style="color: #CD5555">|-----c--------------c------------------------c------------------|</span>
+<span style="color: #CD5555">| Condition |     Formula      |           Effect                |</span>
+<span style="color: #CD5555">|-----l--------------l------------------------l------------------|</span>
+<span style="color: #CD5555">| Dirichlet | $u(0,t)=0$       | mirror wave                     |</span>
+<span style="color: #CD5555">| Dirichlet | $u(0,t)=U_0(t)$  | feed incoming wave              |</span>
+<span style="color: #CD5555">| Neumann   | $u_x(0,t)=0$     | reflect wave                    |</span>
+<span style="color: #CD5555">| Open      | $u_t \pm cu_x=0$ | let wave out of the domain      |</span>
+<span style="color: #CD5555">| Periodic  | $u(0,t)=u(L,t)$  | turn outgoing wave to incoming  |</span>
+<span style="color: #CD5555">|----------------------------------------------------------------|</span>
+
+<span style="color: #8B008B; font-weight: bold">!esummary</span>
+
+<span style="color: #8B008B; font-weight: bold">!bquote</span>
+*Science is a differential equation. Religion is a boundary condition.*
+Alan Turing, computer scientist, 1912-1954.
+<span style="color: #8B008B; font-weight: bold">!equote</span>
+
+<span style="color: #8B008B; font-weight: bold">!split</span>
+<span style="color: #000080; font-weight: bold">======= Appendix: Numerical solution method =======</span>
+<span style="color: #658b00">label{sec:app:numerical}</span>
+
+<span style="color: #000080; font-weight: bold">===== Approximating the wave equation =====</span>
+
+We introduce a uniform mesh in space and time with spacings
+$\Delta x$ and $\Delta t$, respectively. At each mesh
+point
+
+<span style="color: #8B008B; font-weight: bold">!bt</span>
+\[ (x_i,t_n),\quad x_i=i\Delta x,\ i=0,\ldots,N_x,\quad t_n=n\Delta t,
+\ n=0,\ldots,N_t,\]
+<span style="color: #8B008B; font-weight: bold">!et</span>
+the wave equation is approximated by second-order finite differences,
+
+<span style="color: #8B008B; font-weight: bold">!bt</span>
+<span style="color: #658b00">\begin{align*}</span>
+\frac{\partial^2}{\partial t^2}u(x_i,t_n) &amp;\approx
+\frac{u_i^{n+1} - 2u_i^n + u^{n-1}_i}{\Delta t^2},\\
+\frac{\partial^2}{\partial x^2}u(x_i,t_n) &amp;\approx
+\frac{u_{i+1}^{n} - 2u_i^n + u^{n}_{i-1}}{\Delta x^2},
+<span style="color: #658b00">\end{align*}</span>
+<span style="color: #8B008B; font-weight: bold">!et</span>
+where $u^n_i$ is the numerical approximation to the exact solution
+at $(x_i,t_n)$.
+These approximations give rise to an explicit scheme where a new
+value $u^{n+1}_i$ is given by the formula
+
+<span style="color: #8B008B; font-weight: bold">!bt</span>
+<span style="color: #658b00">\begin{equation}</span>
+u^{n+1}_i = -u^{n-1}_i + 2u^n_i + C^2
+\left(u^{n}_{i+1}-2u^{n}_{i} + u^{n}_{i-1}\right),
+<span style="color: #658b00">label{sec:app:numerical:scheme}</span>
+<span style="color: #658b00">\end{equation}</span>
+<span style="color: #8B008B; font-weight: bold">!et</span>
+where the parameter $C$,
+
+<span style="color: #8B008B; font-weight: bold">!bt</span>
+<span style="color: #658b00">\begin{equation}</span>
+C = c\frac{\Delta t}{\Delta x},
+<span style="color: #658b00">\end{equation}</span>
+<span style="color: #8B008B; font-weight: bold">!et</span>
+is known as the dimensionless *Courant number*. A stable time-stepping
+is ensured only if $C\leq 1$. The value $C$ governs also the accuracy
+of the method: $C=1$ actually reproduces the exact solution (!), while
+the accuracy is reduced when decreasing $C$.
+
+<span style="color: #000080; font-weight: bold">===== Approximating the initial conditions =====</span>
+
+The initial condition $u(x,0)=I(x)$, where $I(x)$ is a prescribed
+mathematical function, is implemented in the numerical method by
+
+<span style="color: #8B008B; font-weight: bold">!bt</span>
+\[ u(x_i,0) = I(x_i),\quad i=0,\ldots,N_x\tp\]
+<span style="color: #8B008B; font-weight: bold">!et</span>
+The other initial condition,
+
+<span style="color: #8B008B; font-weight: bold">!bt</span>
+\[ \frac{\partial}{\partial t}(x,0) = 0,\hbox{ or }
+\frac{\partial}{\partial t}(x,0) = V(x),\]
+<span style="color: #8B008B; font-weight: bold">!et</span>
+is approximated by a centered difference over an interval $2\Delta t$.
+When this difference is combined with (ref{sec:app:numerical:scheme}),
+we get a special formula for $u^1_i$. Thereafter, for $n\geq 1$,
+one can apply (ref{sec:app:numerical:scheme}).
+
+<span style="color: #000080; font-weight: bold">===== Approximation of boundary conditions =====</span>
+
+The finite difference scheme (ref{sec:app:numerical:scheme}) is
+applied at all *inner points* in the spatial mesh, $i=1,\ldots,N_x-1$.
+For $i=1$ or $i=N_x-1$, (ref{sec:app:numerical:scheme}) involves
+the boundary points $u^n_0$ or $u^n_{N_x}$ (respectively) at the
+previous time step, but these are condidered known.
+
+<span style="color: #000080; font-weight: bold">=== Dirichlet conditions ===</span>
+
+In case of $u=0$ (Dirichlet) conditions, we just set $u^{n+1}_0=0$
+and $u^{n+1}_{N_x}=0$. Feeding a wave in from the left is just
+a matter of setting $u^{n+1}_0$ equal to the known boundary function of
+time: $u^{n+1}_0=U_0((n+1)\Delta t)$.
+
+<span style="color: #000080; font-weight: bold">=== Neumann conditions ===</span>
+
+No-flux or Neumann conditions are
+discretized by a centered finite difference and combined with
+(ref{sec:app:numerical:scheme}), yielding a modified form of
+(ref{sec:app:numerical:scheme}) at the boundary:
+
+<span style="color: #8B008B; font-weight: bold">!bt</span>
+<span style="color: #658b00">\begin{align}</span>
+u^{n+1}_i &amp;= -u^{n-1}_i  + 2u^n_i + 2C^2
+\left(u^{n}_{i+1}-u^{n}_{i}\right),\quad i=0\\
+u^{n+1}_i &amp;= -u^{n-1}_i + 2u^n_i + 2C^2
+\left(u^{n}_{i-1}-u^{n}_{i}\right),\quad i=N_x\tp
+<span style="color: #658b00">\end{align}</span>
+<span style="color: #8B008B; font-weight: bold">!et</span>
+
+<span style="color: #000080; font-weight: bold">=== Open boundary conditions ===</span>
+
+Radiation, artificial, or open boundary conditions of the type
+(ref{sec:math:bc:open:x0})-(ref{sec:math:bc:open:xL}) are
+discretized by upstream first-order, forward in time differences,
+resulting in explicit updating formulas:
+
+<span style="color: #8B008B; font-weight: bold">!bt</span>
+<span style="color: #658b00">\begin{align}</span>
+u^{n+1}_i &amp;= u^n_i + C(u^n_{i+1} - u^n_i),\quad i=0,\\
+u^{n+1}_i &amp;= u^n_i - C(u^n_{i} - u^n_{i-1}),\quad i=N_x\tp
+<span style="color: #658b00">\end{align}</span>
+<span style="color: #8B008B; font-weight: bold">!et</span>
+Even though the underlying finite differences are of first order only,
+these conditions let the waves out of the domain perfectly and do not
+lower the accuracy of the finite difference scheme used in the interior
+of the domain or at no-flux (Neumann) boundaries.
+
+<span style="color: #000080; font-weight: bold">=== Periodic conditions ===</span>
+
+The periodic condition $u(0,t)=u(L,t)$ is trivial to incorporate in
+the numerical method:
+
+<span style="color: #8B008B; font-weight: bold">!bt</span>
+\[ u^{n+1}_0 = u^{n+1}_{N_x}\tp\]
+<span style="color: #8B008B; font-weight: bold">!et</span>
+
+<span style="color: #8B008B; font-weight: bold">!split</span>
+<span style="color: #000080; font-weight: bold">======= Appendix: Computer code =======</span>
+<span style="color: #658b00">label{sec:app:code}</span>
+
+<span style="color: #228B22">## Demonstrate how to copy code directly from source files, using</span>
+<span style="color: #228B22">## optionally a regex for the first (included) and last line (not</span>
+<span style="color: #228B22">## included).</span>
+
+The complete code used for all experiments except those involving
+periodic boundary conditions can be found in
+the file &quot;`wave1D_dn.py`&quot;: &quot;http://tinyurl.com/jvzzcfn/wave/wave1D/wave1D_dn.py&quot;. The basic solver function for problems without open boundary
+conditions and periodic conditions is listed below.
+
+The key computation is the time stepping loop where
+(ref{sec:app:numerical:scheme}) is used to find new $u^{n+1}_i$
+values at each time level. In addition, a special formula for
+the first step is needed, and boundary conditions must be
+incorporated at the boundary points.
+
+<span style="color: #800080; font-weight: bold">@@@CODE src/code.py fromto: from numpy@def viz</span>
+
+
+<span style="color: #228B22">## Demonstrate code blocks in the document.</span>
+
+Open boundary conditions can be handled as follows.
+
+<span style="color: #8B008B; font-weight: bold">!bc</span> pycod
+def solver(...):
+    ...
+    for n in range(1, Nt):
+        # Update all inner points at time t[n+1]
+
+        # Insert open boundary conditions at the end points
+        i = Nx
+        u[i] = u_1[i] - C*(u_1[i] - u_1[i-1])
+        i = 0
+        u[i] = u_1[i] + C*(u_1[i+1] - u_1[i])
+<span style="color: #8B008B; font-weight: bold">!ec</span>
+A period condition at $x=L$, after an open conditon in the beginning
+of the simulation, can be coded as
+
+<span style="color: #8B008B; font-weight: bold">!bc</span> pycod
+if periodic:
+    u[0] = u[Nx]
+else:
+    i = 0
+    u[i] = u_1[i] + C*(u_1[i+1] - u_1[i])
+<span style="color: #8B008B; font-weight: bold">!ec</span>
+where `peridoc` becomes `True` when `u[-1] &gt; eps` for some
+tolerance `eps`, say `1E-4` (i.e., the outgoing wave hits the right
+boundary).
+</pre></div>

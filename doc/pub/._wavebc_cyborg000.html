@@ -1,0 +1,217 @@
+<!--
+Automatically generated HTML file from Doconce source
+(https://github.com/hplgit/doconce/)
+-->
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="Doconce: https://github.com/hplgit/doconce/" />
+<meta name="description" content="On the impact of boundary conditions in a wave equation">
+<meta name="keywords" content="Dirichlet boundary condition,boundary condition Dirichlet,$u=0$ boundary condition,boundary condition $u=0$,reflecting boundary condition,no-flux boundary condition,Neumann flux boundary condition,boundary condition Neumann,boundary condition reflecting,boundary condition no-flux,feeding of wave at the boundary,incoming boundary wave,boundary condition feeding of wave,boundary condition incoming wave,open boundary condition,radiation condition,artificial boundary condition,boundary condition open,boundary condition radiation,boundary condition artifical">
+
+
+
+<!-- Bootstrap style: bootswatch_cyborg -->
+<link href="http://netdna.bootstrapcdn.com/bootswatch/3.1.1/cyborg/bootstrap.min.css" rel="stylesheet">
+<!-- not necessary
+<link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+-->
+
+<style type="text/css">
+/* Let inline verbatim have the same color as the surroundings */
+code { color: inherit; background-color: transparent; }
+/* Let pre tags for code blocks have the same color as the surroundings */
+pre { color: inherit; background-color: transparent; }
+</style>
+
+</head>
+
+<!-- tocinfo
+{'highest level': 1,
+ 'sections': [(' Mathematical model and solution method ',
+               1,
+               'sec:math',
+               'sec:math'),
+              (' The wave equation problem ',
+               2,
+               'sec:math:pde',
+               'sec:math:pde'),
+              (' Initial conditions ', 2, 'sec:math:ic', 'sec:math:ic'),
+              (' Boundary conditions ', 2, 'sec:math:bc', 'sec:math:bc'),
+              (' Fixed $u$ ', 3, None, '___sec4'),
+              (' Reflecting condition ', 3, None, '___sec5'),
+              (' Feeding a wave from the boundary ', 3, None, '___sec6'),
+              (' Open boundary condition ', 3, None, '___sec7'),
+              (' Periodic boundary condition ', 3, None, '___sec8'),
+              (' Numerical solution method ', 2, None, '___sec9'),
+              (' Demonstrations ', 1, None, '___sec10'),
+              (' Dirichlet and Neumann conditions: reflecting and mirroring boundaries ',
+               2,
+               None,
+               '___sec11'),
+              (' Numerical noise ', 3, None, '___sec12'),
+              (' Effect of impulsive start of waves ', 2, None, '___sec13'),
+              (' Feeding of waves from the boundary ', 2, None, '___sec14'),
+              (' Open and periodic boundary conditions ',
+               2,
+               None,
+               '___sec15'),
+              (' Error in the open boundary condition ', 3, None, '___sec16'),
+              (' Appendix: Numerical solution method ',
+               1,
+               'sec:app:numerical',
+               'sec:app:numerical'),
+              (' Approximating the wave equation ', 2, None, '___sec18'),
+              (' Approximating the initial conditions ', 2, None, '___sec19'),
+              (' Approximation of boundary conditions ', 2, None, '___sec20'),
+              (' Dirichlet conditions ', 3, None, '___sec21'),
+              (' Neumann conditions ', 3, None, '___sec22'),
+              (' Open boundary conditions ', 3, None, '___sec23'),
+              (' Periodic conditions ', 3, None, '___sec24'),
+              (' Appendix: Computer code ',
+               1,
+               'sec:app:code',
+               'sec:app:code')]}
+end of tocinfo -->
+
+<body>
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: {
+     equationNumbers: {  autoNumber: "none"  },
+     extensions: ["AMSmath.js", "AMSsymbols.js", "autobold.js"]
+  }
+});
+</script>
+<script type="text/javascript"
+ src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<!-- Fix slow MathJax rendering in IE8 -->
+<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7">
+
+
+<!-- newcommands_keep.tex -->
+$$
+\newcommand{\half}{\frac{1}{2}}
+\newcommand{\halfi}{{1/2}}
+\newcommand{\tp}{\thinspace .}
+$$
+
+
+
+
+    
+<!-- Bootstrap navigation bar -->
+<div class="navbar navbar-default navbar-fixed-top">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="wavebc_cyborg.html">On the impact of boundary conditions in a wave equation</a>
+  </div>
+  <div class="navbar-collapse collapse navbar-responsive-collapse">
+    <ul class="nav navbar-nav navbar-right">
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Contents <b class="caret"></b></a>
+        <ul class="dropdown-menu">
+     <!-- navigation toc: "Mathematical model and solution method" --> <li><a href="#sec:math" style="font-size: 80%;"><b>Mathematical model and solution method</b></a></li>
+     <!-- navigation toc: "The wave equation problem" --> <li><a href="#sec:math:pde" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;The wave equation problem</a></li>
+     <!-- navigation toc: "Initial conditions" --> <li><a href="#sec:math:ic" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Initial conditions</a></li>
+     <!-- navigation toc: "Boundary conditions" --> <li><a href="#sec:math:bc" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Boundary conditions</a></li>
+     <!-- navigation toc: "Numerical solution method" --> <li><a href="#___sec9" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Numerical solution method</a></li>
+     <!-- navigation toc: "Demonstrations" --> <li><a href="#___sec10" style="font-size: 80%;"><b>Demonstrations</b></a></li>
+     <!-- navigation toc: "Dirichlet and Neumann conditions: reflecting and mirroring boundaries" --> <li><a href="#___sec11" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Dirichlet and Neumann conditions: reflecting and mirroring boundaries</a></li>
+     <!-- navigation toc: "Effect of impulsive start of waves" --> <li><a href="#___sec13" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Effect of impulsive start of waves</a></li>
+     <!-- navigation toc: "Feeding of waves from the boundary" --> <li><a href="#___sec14" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Feeding of waves from the boundary</a></li>
+     <!-- navigation toc: "Open and periodic boundary conditions" --> <li><a href="#___sec15" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Open and periodic boundary conditions</a></li>
+     <!-- navigation toc: "Appendix: Numerical solution method" --> <li><a href="#sec:app:numerical" style="font-size: 80%;"><b>Appendix: Numerical solution method</b></a></li>
+     <!-- navigation toc: "Approximating the wave equation" --> <li><a href="#___sec18" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Approximating the wave equation</a></li>
+     <!-- navigation toc: "Approximating the initial conditions" --> <li><a href="#___sec19" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Approximating the initial conditions</a></li>
+     <!-- navigation toc: "Approximation of boundary conditions" --> <li><a href="#___sec20" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Approximation of boundary conditions</a></li>
+     <!-- navigation toc: "Appendix: Computer code" --> <li><a href="#sec:app:code" style="font-size: 80%;"><b>Appendix: Computer code</b></a></li>
+
+        </ul>
+      </li>
+    </ul>
+  </div>
+</div>
+</div> <!-- end of navigation bar -->
+
+<div class="container">
+
+<p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p> <!-- add vertical space -->
+
+<a name="part0000"></a>
+<!-- ------------------- main content ---------------------- -->
+
+<!-- 2DO: Use footnotes, links, citations -->
+<!-- Maybe a stripped version is fine for education of doconce/latex. -->
+<!-- Consider if-else of blocks to create the small version. -->
+
+<title>On the impact of boundary conditions in a wave equation</title>
+
+<div class="jumbotron">
+<center><h1>On the impact of boundary conditions in a wave equation</h1></center>  <!-- document title -->
+
+<p>
+<!-- author(s): Hans Petter Langtangen -->
+
+<center>
+<b>Hans Petter Langtangen</b> [1, 2]
+</center>
+
+
+<p>
+<!-- institution(s) -->
+
+<center>[1] <b>Center for Biomedical Computing, Simula Research Laboratory</b></center>
+<center>[2] <b>Department of Informatics, University of Oslo</b></center>
+<p>
+<center><h4>Jun 1, 2014</h4></center> <!-- date -->
+<p>
+<b>Summary.</b> The purpose of this document is to demonstrate how
+different types of boundary conditions impacts the solution of
+standard, linear wave equation in one spatial dimension. Four types of
+conditions are treated: known value (Dirichlet condition), zero flux
+(Neumann condition), open boundary, and periodic boundary.
+
+<p>
+<!-- Sphinx shows no table of contents (TOC) so two splits create an empty page -->
+
+
+<p><a href="._wavebc_cyborg001.html" class="btn btn-primary btn-lg">Read &raquo;</a></p>
+
+
+</div> <!-- end jumbotron -->
+
+<p>
+<ul class="pager">
+
+  <li class="next">
+    <a href="._wavebc_cyborg001.html">Next &rarr;</a>
+  </li>
+
+</ul>
+<!-- ------------------- end of main content --------------- -->
+
+</div>  <!-- end container -->
+<!-- include javascript, jQuery *first* -->
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+
+<!-- Bootstrap footer
+<footer>
+<a href="http://..."><img width="250" align=right src="http://..."></a>
+</footer>
+-->
+
+
+</body>
+</html>
+    
+

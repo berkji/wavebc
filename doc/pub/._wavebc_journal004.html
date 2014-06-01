@@ -1,0 +1,297 @@
+<!--
+Automatically generated HTML file from Doconce source
+(https://github.com/hplgit/doconce/)
+-->
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="Doconce: https://github.com/hplgit/doconce/" />
+<meta name="description" content="On the impact of boundary conditions in a wave equation">
+<meta name="keywords" content="Dirichlet boundary condition,boundary condition Dirichlet,$u=0$ boundary condition,boundary condition $u=0$,reflecting boundary condition,no-flux boundary condition,Neumann flux boundary condition,boundary condition Neumann,boundary condition reflecting,boundary condition no-flux,feeding of wave at the boundary,incoming boundary wave,boundary condition feeding of wave,boundary condition incoming wave,open boundary condition,radiation condition,artificial boundary condition,boundary condition open,boundary condition radiation,boundary condition artifical">
+
+
+
+<!-- Bootstrap style: bootswatch_journal -->
+<link href="http://netdna.bootstrapcdn.com/bootswatch/3.1.1/journal/bootstrap.min.css" rel="stylesheet">
+<!-- not necessary
+<link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+-->
+
+</head>
+
+<!-- tocinfo
+{'highest level': 1,
+ 'sections': [(' Mathematical model and solution method ',
+               1,
+               'sec:math',
+               'sec:math'),
+              (' The wave equation problem ',
+               2,
+               'sec:math:pde',
+               'sec:math:pde'),
+              (' Initial conditions ', 2, 'sec:math:ic', 'sec:math:ic'),
+              (' Boundary conditions ', 2, 'sec:math:bc', 'sec:math:bc'),
+              (' Fixed $u$ ', 3, None, '___sec4'),
+              (' Reflecting condition ', 3, None, '___sec5'),
+              (' Feeding a wave from the boundary ', 3, None, '___sec6'),
+              (' Open boundary condition ', 3, None, '___sec7'),
+              (' Periodic boundary condition ', 3, None, '___sec8'),
+              (' Numerical solution method ', 2, None, '___sec9'),
+              (' Demonstrations ', 1, None, '___sec10'),
+              (' Dirichlet and Neumann conditions: reflecting and mirroring boundaries ',
+               2,
+               None,
+               '___sec11'),
+              (' Numerical noise ', 3, None, '___sec12'),
+              (' Effect of impulsive start of waves ', 2, None, '___sec13'),
+              (' Feeding of waves from the boundary ', 2, None, '___sec14'),
+              (' Open and periodic boundary conditions ',
+               2,
+               None,
+               '___sec15'),
+              (' Error in the open boundary condition ', 3, None, '___sec16'),
+              (' Appendix: Numerical solution method ',
+               1,
+               'sec:app:numerical',
+               'sec:app:numerical'),
+              (' Approximating the wave equation ', 2, None, '___sec18'),
+              (' Approximating the initial conditions ', 2, None, '___sec19'),
+              (' Approximation of boundary conditions ', 2, None, '___sec20'),
+              (' Dirichlet conditions ', 3, None, '___sec21'),
+              (' Neumann conditions ', 3, None, '___sec22'),
+              (' Open boundary conditions ', 3, None, '___sec23'),
+              (' Periodic conditions ', 3, None, '___sec24'),
+              (' Appendix: Computer code ',
+               1,
+               'sec:app:code',
+               'sec:app:code')]}
+end of tocinfo -->
+
+<body>
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: {
+     equationNumbers: {  autoNumber: "none"  },
+     extensions: ["AMSmath.js", "AMSsymbols.js", "autobold.js"]
+  }
+});
+</script>
+<script type="text/javascript"
+ src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<!-- Fix slow MathJax rendering in IE8 -->
+<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7">
+
+
+<!-- newcommands_keep.tex -->
+$$
+\newcommand{\half}{\frac{1}{2}}
+\newcommand{\halfi}{{1/2}}
+\newcommand{\tp}{\thinspace .}
+$$
+
+
+
+
+    
+<!-- Bootstrap navigation bar -->
+<div class="navbar navbar-default navbar-fixed-top">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="wavebc_journal.html">On the impact of boundary conditions in a wave equation</a>
+  </div>
+  <div class="navbar-collapse collapse navbar-responsive-collapse">
+    <ul class="nav navbar-nav navbar-right">
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Contents <b class="caret"></b></a>
+        <ul class="dropdown-menu">
+     <!-- navigation toc: "Mathematical model and solution method" --> <li><a href="#sec:math" style="font-size: 80%;"><b>Mathematical model and solution method</b></a></li>
+     <!-- navigation toc: "The wave equation problem" --> <li><a href="#sec:math:pde" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;The wave equation problem</a></li>
+     <!-- navigation toc: "Initial conditions" --> <li><a href="#sec:math:ic" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Initial conditions</a></li>
+     <!-- navigation toc: "Boundary conditions" --> <li><a href="#sec:math:bc" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Boundary conditions</a></li>
+     <!-- navigation toc: "Numerical solution method" --> <li><a href="#___sec9" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Numerical solution method</a></li>
+     <!-- navigation toc: "Demonstrations" --> <li><a href="#___sec10" style="font-size: 80%;"><b>Demonstrations</b></a></li>
+     <!-- navigation toc: "Dirichlet and Neumann conditions: reflecting and mirroring boundaries" --> <li><a href="#___sec11" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Dirichlet and Neumann conditions: reflecting and mirroring boundaries</a></li>
+     <!-- navigation toc: "Effect of impulsive start of waves" --> <li><a href="#___sec13" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Effect of impulsive start of waves</a></li>
+     <!-- navigation toc: "Feeding of waves from the boundary" --> <li><a href="#___sec14" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Feeding of waves from the boundary</a></li>
+     <!-- navigation toc: "Open and periodic boundary conditions" --> <li><a href="#___sec15" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Open and periodic boundary conditions</a></li>
+     <!-- navigation toc: "Appendix: Numerical solution method" --> <li><a href="#sec:app:numerical" style="font-size: 80%;"><b>Appendix: Numerical solution method</b></a></li>
+     <!-- navigation toc: "Approximating the wave equation" --> <li><a href="#___sec18" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Approximating the wave equation</a></li>
+     <!-- navigation toc: "Approximating the initial conditions" --> <li><a href="#___sec19" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Approximating the initial conditions</a></li>
+     <!-- navigation toc: "Approximation of boundary conditions" --> <li><a href="#___sec20" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Approximation of boundary conditions</a></li>
+     <!-- navigation toc: "Appendix: Computer code" --> <li><a href="#sec:app:code" style="font-size: 80%;"><b>Appendix: Computer code</b></a></li>
+
+        </ul>
+      </li>
+    </ul>
+  </div>
+</div>
+</div> <!-- end of navigation bar -->
+
+<div class="container">
+
+<p>&nbsp;</p><p>&nbsp;</p><p>&nbsp;</p> <!-- add vertical space -->
+
+<a name="part0004"></a>
+<!-- !split -->
+
+<h1>Appendix: Numerical solution method <a name="sec:app:numerical"></a></h1>
+
+<h2>Approximating the wave equation  <a name="___sec18"></a></h2>
+
+We introduce a uniform mesh in space and time with spacings
+\( \Delta x \) and \( \Delta t \), respectively. At each mesh
+point
+
+$$ (x_i,t_n),\quad x_i=i\Delta x,\ i=0,\ldots,N_x,\quad t_n=n\Delta t,
+\ n=0,\ldots,N_t,$$
+
+the wave equation is approximated by second-order finite differences,
+
+$$
+\begin{align*}
+\frac{\partial^2}{\partial t^2}u(x_i,t_n) &\approx
+\frac{u_i^{n+1} - 2u_i^n + u^{n-1}_i}{\Delta t^2},\\
+\frac{\partial^2}{\partial x^2}u(x_i,t_n) &\approx
+\frac{u_{i+1}^{n} - 2u_i^n + u^{n}_{i-1}}{\Delta x^2},
+\end{align*}
+$$
+
+where \( u^n_i \) is the numerical approximation to the exact solution
+at \( (x_i,t_n) \).
+These approximations give rise to an explicit scheme where a new
+value \( u^{n+1}_i \) is given by the formula
+
+$$
+\begin{equation}
+u^{n+1}_i = -u^{n-1}_i + 2u^n_i + C^2
+\left(u^{n}_{i+1}-2u^{n}_{i} + u^{n}_{i-1}\right),
+\tag{6}
+\end{equation}
+$$
+
+where the parameter \( C \),
+
+$$
+\begin{equation}
+C = c\frac{\Delta t}{\Delta x},
+\end{equation}
+$$
+
+is known as the dimensionless <em>Courant number</em>. A stable time-stepping
+is ensured only if \( C\leq 1 \). The value \( C \) governs also the accuracy
+of the method: \( C=1 \) actually reproduces the exact solution (!), while
+the accuracy is reduced when decreasing \( C \).
+
+<h2>Approximating the initial conditions  <a name="___sec19"></a></h2>
+
+The initial condition \( u(x,0)=I(x) \), where \( I(x) \) is a prescribed
+mathematical function, is implemented in the numerical method by
+
+$$ u(x_i,0) = I(x_i),\quad i=0,\ldots,N_x\tp$$
+
+The other initial condition,
+
+$$ \frac{\partial}{\partial t}(x,0) = 0,\hbox{ or }
+\frac{\partial}{\partial t}(x,0) = V(x),$$
+
+is approximated by a centered difference over an interval \( 2\Delta t \).
+When this difference is combined with <a href="#mjx-eqn-6">(6)</a>,
+we get a special formula for \( u^1_i \). Thereafter, for \( n\geq 1 \),
+one can apply <a href="#mjx-eqn-6">(6)</a>.
+
+<h2>Approximation of boundary conditions  <a name="___sec20"></a></h2>
+
+The finite difference scheme <a href="#mjx-eqn-6">(6)</a> is
+applied at all <em>inner points</em> in the spatial mesh, \( i=1,\ldots,N_x-1 \).
+For \( i=1 \) or \( i=N_x-1 \), <a href="#mjx-eqn-6">(6)</a> involves
+the boundary points \( u^n_0 \) or \( u^n_{N_x} \) (respectively) at the
+previous time step, but these are condidered known.
+
+<h3>Dirichlet conditions  <a name="___sec21"></a></h3>
+
+In case of \( u=0 \) (Dirichlet) conditions, we just set \( u^{n+1}_0=0 \)
+and \( u^{n+1}_{N_x}=0 \). Feeding a wave in from the left is just
+a matter of setting \( u^{n+1}_0 \) equal to the known boundary function of
+time: \( u^{n+1}_0=U_0((n+1)\Delta t) \).
+
+<h3>Neumann conditions  <a name="___sec22"></a></h3>
+
+No-flux or Neumann conditions are
+discretized by a centered finite difference and combined with
+<a href="#mjx-eqn-6">(6)</a>, yielding a modified form of
+<a href="#mjx-eqn-6">(6)</a> at the boundary:
+
+$$
+\begin{align}
+u^{n+1}_i &= -u^{n-1}_i  + 2u^n_i + 2C^2
+\left(u^{n}_{i+1}-u^{n}_{i}\right),\quad i=0\\
+u^{n+1}_i &= -u^{n-1}_i + 2u^n_i + 2C^2
+\left(u^{n}_{i-1}-u^{n}_{i}\right),\quad i=N_x\tp
+\end{align}
+$$
+
+<h3>Open boundary conditions  <a name="___sec23"></a></h3>
+
+Radiation, artificial, or open boundary conditions of the type
+<a href="._wavebc_journal002.html#mjx-eqn-3">(3)</a>-<a href="._wavebc_journal002.html#mjx-eqn-4">(4)</a> are
+discretized by upstream first-order, forward in time differences,
+resulting in explicit updating formulas:
+
+$$
+\begin{align}
+u^{n+1}_i &= u^n_i + C(u^n_{i+1} - u^n_i),\quad i=0,\\
+u^{n+1}_i &= u^n_i - C(u^n_{i} - u^n_{i-1}),\quad i=N_x\tp
+\end{align}
+$$
+
+Even though the underlying finite differences are of first order only,
+these conditions let the waves out of the domain perfectly and do not
+lower the accuracy of the finite difference scheme used in the interior
+of the domain or at no-flux (Neumann) boundaries.
+
+<h3>Periodic conditions  <a name="___sec24"></a></h3>
+
+The periodic condition \( u(0,t)=u(L,t) \) is trivial to incorporate in
+the numerical method:
+
+$$ u^{n+1}_0 = u^{n+1}_{N_x}\tp$$
+
+
+<p>
+<p>
+<ul class="pager">
+  <li class="previous">
+    <a href="._wavebc_journal003.html">&larr; Prev</a>
+  </li>
+
+  <li class="next">
+    <a href="._wavebc_journal005.html">Next &rarr;</a>
+  </li>
+
+</ul>
+<!-- ------------------- end of main content --------------- -->
+
+</div>  <!-- end container -->
+<!-- include javascript, jQuery *first* -->
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+
+<!-- Bootstrap footer
+<footer>
+<a href="http://..."><img width="250" align=right src="http://..."></a>
+</footer>
+-->
+
+
+</body>
+</html>
+    
+

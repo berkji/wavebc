@@ -1,0 +1,144 @@
+.. !split
+
+.. _sec:app:numerical:
+
+Appendix: Numerical solution method
+===================================
+
+Approximating the wave equation
+-------------------------------
+
+We introduce a uniform mesh in space and time with spacings
+:math:`\Delta x` and :math:`\Delta t`, respectively. At each mesh
+point
+
+.. math::
+         (x_i,t_n),\quad x_i=i\Delta x,\ i=0,\ldots,N_x,\quad t_n=n\Delta t,
+        \ n=0,\ldots,N_t,
+
+the wave equation is approximated by second-order finite differences,
+
+.. math::
+        
+        \frac{\partial^2}{\partial t^2}u(x_i,t_n) &\approx
+        \frac{u_i^{n+1} - 2u_i^n + u^{n-1}_i}{\Delta t^2},\\
+        \frac{\partial^2}{\partial x^2}u(x_i,t_n) &\approx
+        \frac{u_{i+1}^{n} - 2u_i^n + u^{n}_{i-1}}{\Delta x^2},
+        
+
+where :math:`u^n_i` is the numerical approximation to the exact solution
+at :math:`(x_i,t_n)`.
+These approximations give rise to an explicit scheme where a new
+value :math:`u^{n+1}_i` is given by the formula
+
+.. _Eq:sec:app:numerical:scheme:
+
+.. math::
+   :label: sec:app:numerical:scheme
+        
+        u^{n+1}_i = -u^{n-1}_i + 2u^n_i + C^2
+        \left(u^{n}_{i+1}-2u^{n}_{i} + u^{n}_{i-1}\right),
+        
+        
+
+where the parameter :math:`C`,
+
+.. math::
+        
+        C = c\frac{\Delta t}{\Delta x},
+        
+
+is known as the dimensionless *Courant number*. A stable time-stepping
+is ensured only if :math:`C\leq 1`. The value :math:`C` governs also the accuracy
+of the method: :math:`C=1` actually reproduces the exact solution (!), while
+the accuracy is reduced when decreasing :math:`C`.
+
+Approximating the initial conditions
+------------------------------------
+
+The initial condition :math:`u(x,0)=I(x)`, where :math:`I(x)` is a prescribed
+mathematical function, is implemented in the numerical method by
+
+.. math::
+         u(x_i,0) = I(x_i),\quad i=0,\ldots,N_x{\thinspace .}
+
+The other initial condition,
+
+.. math::
+         \frac{\partial}{\partial t}(x,0) = 0,\hbox{ or }
+        \frac{\partial}{\partial t}(x,0) = V(x),
+
+is approximated by a centered difference over an interval :math:`2\Delta t`.
+When this difference is combined with :eq:`sec:app:numerical:scheme`,
+we get a special formula for :math:`u^1_i`. Thereafter, for :math:`n\geq 1`,
+one can apply :eq:`sec:app:numerical:scheme`.
+
+Approximation of boundary conditions
+------------------------------------
+
+The finite difference scheme :eq:`sec:app:numerical:scheme` is
+applied at all *inner points* in the spatial mesh, :math:`i=1,\ldots,N_x-1`.
+For :math:`i=1` or :math:`i=N_x-1`, :eq:`sec:app:numerical:scheme` involves
+the boundary points :math:`u^n_0` or :math:`u^n_{N_x}` (respectively) at the
+previous time step, but these are condidered known.
+
+Dirichlet conditions
+~~~~~~~~~~~~~~~~~~~~
+
+In case of :math:`u=0` (Dirichlet) conditions, we just set :math:`u^{n+1}_0=0`
+and :math:`u^{n+1}_{N_x}=0`. Feeding a wave in from the left is just
+a matter of setting :math:`u^{n+1}_0` equal to the known boundary function of
+time: :math:`u^{n+1}_0=U_0((n+1)\Delta t)`.
+
+Neumann conditions
+~~~~~~~~~~~~~~~~~~
+
+No-flux or Neumann conditions are
+discretized by a centered finite difference and combined with
+:eq:`sec:app:numerical:scheme`, yielding a modified form of
+:eq:`sec:app:numerical:scheme` at the boundary:
+
+.. math::
+        
+        u^{n+1}_i = -u^{n-1}_i  + 2u^n_i + 2C^2
+        \left(u^{n}_{i+1}-u^{n}_{i}\right),\quad i=0
+        
+
+.. math::
+         
+        u^{n+1}_i = -u^{n-1}_i + 2u^n_i + 2C^2
+        \left(u^{n}_{i-1}-u^{n}_{i}\right),\quad i=N_x{\thinspace .}
+        
+
+Open boundary conditions
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+Radiation, artificial, or open boundary conditions of the type
+:ref:`(2.3) <Eq:sec:math:bc:open:x0>`-:ref:`(2.4) <Eq:sec:math:bc:open:xL>` are
+discretized by upstream first-order, forward in time differences,
+resulting in explicit updating formulas:
+
+.. math::
+        
+        u^{n+1}_i = u^n_i + C(u^n_{i+1} - u^n_i),\quad i=0,
+        
+
+.. math::
+         
+        u^{n+1}_i = u^n_i - C(u^n_{i} - u^n_{i-1}),\quad i=N_x{\thinspace .}
+        
+
+Even though the underlying finite differences are of first order only,
+these conditions let the waves out of the domain perfectly and do not
+lower the accuracy of the finite difference scheme used in the interior
+of the domain or at no-flux (Neumann) boundaries.
+
+Periodic conditions
+~~~~~~~~~~~~~~~~~~~
+
+The periodic condition :math:`u(0,t)=u(L,t)` is trivial to incorporate in
+the numerical method:
+
+.. math::
+         u^{n+1}_0 = u^{n+1}_{N_x}{\thinspace .}
+
