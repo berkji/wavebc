@@ -7,7 +7,7 @@ Appendix: Computer code
 
 The complete code used for all experiments except those involving
 periodic boundary conditions can be found in
-the file `wave1D_dn.py <http://tinyurl.com/jvzzcfn/wave/wave1D/wave1D_dn.py>`_. The basic solver function for problems without open boundary
+the file `wave1D_dn.py <http://tinyurl.com/jvzzcfn/wave/wave1D/wave1D_dn.py>`__. The basic solver function for problems without open boundary
 conditions and periodic conditions is listed below.
 
 The key computation is the time stepping loop where

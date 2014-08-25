@@ -425,7 +425,7 @@ values at each time level. In addition, a special formula for
 the first step is needed, and boundary conditions must be
 incorporated at the boundary points.
 
-@@@CODE src/code.py fromto: from numpy@def viz
+@@@CODE src-wavebc/code.py fromto: from numpy@def viz
 
 
 ## Demonstrate code blocks in the document.

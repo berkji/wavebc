@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 #
 # On the impact of boundary conditions in a wave equation documentation build configuration file, created by
-# sphinx-quickstart on Sun Jun  1 16:53:25 2014.
+# sphinx-quickstart on Mon Aug 25 11:10:14 2014.
 #
 # This file is execfile()d with the current directory set to its
 # containing dir.
@@ -39,9 +39,16 @@ extensions = [
           'sphinx.ext.doctest',
           'sphinx.ext.viewcode',
           'sphinx.ext.intersphinx',
-          'sphinx.ext.inheritance_diagram']
+          'sphinx.ext.inheritance_diagram',
+          'IPython.sphinxext.ipython_console_highlighting']
 
 #pngmath_dvipng_args = ['-D 200', '-bg Transparent', '-gamma 1.5']  # large math fonts (200)
+
+# Make sphinx aware of the DocOnce lexer
+def setup(app):
+    from sphinx.highlighting import lexers
+    from doconce.misc import DocOnceLexer
+    lexers['doconce'] = DocOnceLexer()
 
 # Check which additional themes that are installed
 additional_themes_installed = []

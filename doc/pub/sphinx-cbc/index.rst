@@ -7,7 +7,7 @@ On the impact of boundary conditions in a wave equation
 Contents:
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 3
 
    ._wavebc000
    ._wavebc001

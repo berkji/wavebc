@@ -82,24 +82,13 @@ end of tocinfo -->
 MathJax.Hub.Config({
   TeX: {
      equationNumbers: {  autoNumber: "none"  },
-     extensions: ["AMSmath.js", "AMSsymbols.js", "autobold.js"]
+     extensions: ["AMSmath.js", "AMSsymbols.js", "autobold.js", "color.js"]
   }
 });
 </script>
 <script type="text/javascript"
  src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
 </script>
-<!-- Fix slow MathJax rendering in IE8 -->
-<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7">
-
-
-<!-- newcommands_keep.tex -->
-$$
-\newcommand{\half}{\frac{1}{2}}
-\newcommand{\halfi}{{1/2}}
-\newcommand{\tp}{\thinspace .}
-$$
-
 
 
 
@@ -119,21 +108,21 @@ $$
       <li class="dropdown">
         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Contents <b class="caret"></b></a>
         <ul class="dropdown-menu">
-     <!-- navigation toc: "Mathematical model and solution method" --> <li><a href="#sec:math" style="font-size: 80%;"><b>Mathematical model and solution method</b></a></li>
-     <!-- navigation toc: "The wave equation problem" --> <li><a href="#sec:math:pde" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;The wave equation problem</a></li>
-     <!-- navigation toc: "Initial conditions" --> <li><a href="#sec:math:ic" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Initial conditions</a></li>
-     <!-- navigation toc: "Boundary conditions" --> <li><a href="#sec:math:bc" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Boundary conditions</a></li>
-     <!-- navigation toc: "Numerical solution method" --> <li><a href="#___sec9" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Numerical solution method</a></li>
-     <!-- navigation toc: "Demonstrations" --> <li><a href="#___sec10" style="font-size: 80%;"><b>Demonstrations</b></a></li>
-     <!-- navigation toc: "Dirichlet and Neumann conditions: reflecting and mirroring boundaries" --> <li><a href="#___sec11" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Dirichlet and Neumann conditions: reflecting and mirroring boundaries</a></li>
-     <!-- navigation toc: "Effect of impulsive start of waves" --> <li><a href="#___sec13" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Effect of impulsive start of waves</a></li>
-     <!-- navigation toc: "Feeding of waves from the boundary" --> <li><a href="#___sec14" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Feeding of waves from the boundary</a></li>
-     <!-- navigation toc: "Open and periodic boundary conditions" --> <li><a href="#___sec15" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Open and periodic boundary conditions</a></li>
-     <!-- navigation toc: "Appendix: Numerical solution method" --> <li><a href="#sec:app:numerical" style="font-size: 80%;"><b>Appendix: Numerical solution method</b></a></li>
-     <!-- navigation toc: "Approximating the wave equation" --> <li><a href="#___sec18" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Approximating the wave equation</a></li>
-     <!-- navigation toc: "Approximating the initial conditions" --> <li><a href="#___sec19" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Approximating the initial conditions</a></li>
-     <!-- navigation toc: "Approximation of boundary conditions" --> <li><a href="#___sec20" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Approximation of boundary conditions</a></li>
-     <!-- navigation toc: "Appendix: Computer code" --> <li><a href="#sec:app:code" style="font-size: 80%;"><b>Appendix: Computer code</b></a></li>
+     <!-- navigation toc: --> <li><a href="._wavebc_cyborg002.html#sec:math" style="font-size: 80%;"><b>Mathematical model and solution method</b></a></li>
+     <!-- navigation toc: --> <li><a href="._wavebc_cyborg002.html#sec:math:pde" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;The wave equation problem</a></li>
+     <!-- navigation toc: --> <li><a href="._wavebc_cyborg002.html#sec:math:ic" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Initial conditions</a></li>
+     <!-- navigation toc: --> <li><a href="._wavebc_cyborg002.html#sec:math:bc" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Boundary conditions</a></li>
+     <!-- navigation toc: --> <li><a href="._wavebc_cyborg002.html#___sec9" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Numerical solution method</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec10" style="font-size: 80%;"><b>Demonstrations</b></a></li>
+     <!-- navigation toc: --> <li><a href="#___sec11" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Dirichlet and Neumann conditions: reflecting and mirroring boundaries</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec13" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Effect of impulsive start of waves</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec14" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Feeding of waves from the boundary</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec15" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Open and periodic boundary conditions</a></li>
+     <!-- navigation toc: --> <li><a href="._wavebc_cyborg004.html#sec:app:numerical" style="font-size: 80%;"><b>Appendix: Numerical solution method</b></a></li>
+     <!-- navigation toc: --> <li><a href="._wavebc_cyborg004.html#___sec18" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Approximating the wave equation</a></li>
+     <!-- navigation toc: --> <li><a href="._wavebc_cyborg004.html#___sec19" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Approximating the initial conditions</a></li>
+     <!-- navigation toc: --> <li><a href="._wavebc_cyborg004.html#___sec20" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Approximation of boundary conditions</a></li>
+     <!-- navigation toc: --> <li><a href="._wavebc_cyborg005.html#sec:app:code" style="font-size: 80%;"><b>Appendix: Computer code</b></a></li>
 
         </ul>
       </li>
@@ -149,9 +138,9 @@ $$
 <a name="part0003"></a>
 <!-- !split -->
 
-<h1>Demonstrations  <a name="___sec10"></a></h1>
+<h1 id="___sec10">Demonstrations <a name="___sec10"></a></h1>
 
-<h2>Dirichlet and Neumann conditions: reflecting and mirroring boundaries  <a name="___sec11"></a></h2>
+<h2 id="___sec11">Dirichlet and Neumann conditions: reflecting and mirroring boundaries <a name="___sec11"></a></h2>
 
 The first two animations demonstrates the differences between a
 Dirichlet condition \( u=0 \) at the boundary and a Neumann condition
@@ -196,7 +185,7 @@ plug profile.
 </div>
 <p><em></em></p>
 
-<h3>Numerical noise  <a name="___sec12"></a></h3>
+<h3 id="___sec12">Numerical noise <a name="___sec12"></a></h3>
 
 All of the above computations were run with unit Courant number, which
 means that the solutions are exact without any numerical errors. (This
@@ -2743,7 +2732,7 @@ function faster_mov_wavebc_plug_Nx100_C0_5_frame_0000()
 
 <br><em>A plug wave generates very significant numerical noise (\( C=0.5 \)).</em><br>
 
-<h2>Effect of impulsive start of waves  <a name="___sec13"></a></h2>
+<h2 id="___sec13">Effect of impulsive start of waves <a name="___sec13"></a></h2>
 
 The previous demonstrations had an initial condition with a prescribed
 \( u=0 \) profile at rest (\( u_t=0 \)). Alternatively, one may start with
@@ -2764,7 +2753,7 @@ an impulsive start from an impact.
 </div>
 <p><em>Impulsive start of a wave motion: \( I=0 \), \( V\neq 0 \).</em></p>
 
-<h2>Feeding of waves from the boundary  <a name="___sec14"></a></h2>
+<h2 id="___sec14">Feeding of waves from the boundary <a name="___sec14"></a></h2>
 
 We can also start with a flat profile, \( u=0 \), at rest, \( u_t=0 \), and
 create propagating signals by moving \( u \) at the boundary. That is,
@@ -2782,7 +2771,7 @@ signals.
 
 <p><em>Feeding of waves from the boundary by a time-dependent Dirichlet condition \( U_0(t) \).</em></p>
 
-<h2>Open and periodic boundary conditions  <a name="___sec15"></a></h2>
+<h2 id="___sec15">Open and periodic boundary conditions <a name="___sec15"></a></h2>
 
 
 <div>
@@ -2804,7 +2793,7 @@ signals.
 </div>
 <p><em>Demonstrations of periodic boundary condition on the left combined with an open boundary condition on the right: waves passing out of the domain enter the left end again.</em></p>
 
-<h3>Error in the open boundary condition  <a name="___sec16"></a></h3>
+<h3 id="___sec16">Error in the open boundary condition <a name="___sec16"></a></h3>
 
 In 2D and 3D...
 
@@ -2853,15 +2842,14 @@ In 2D and 3D...
 
 <p>
 <p>
+<!-- navigation buttons at the bottom of the page -->
 <ul class="pager">
   <li class="previous">
     <a href="._wavebc_cyborg002.html">&larr; Prev</a>
   </li>
-
   <li class="next">
     <a href="._wavebc_cyborg004.html">Next &rarr;</a>
   </li>
-
 </ul>
 <!-- ------------------- end of main content --------------- -->
 

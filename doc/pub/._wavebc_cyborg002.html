@@ -82,24 +82,13 @@ end of tocinfo -->
 MathJax.Hub.Config({
   TeX: {
      equationNumbers: {  autoNumber: "none"  },
-     extensions: ["AMSmath.js", "AMSsymbols.js", "autobold.js"]
+     extensions: ["AMSmath.js", "AMSsymbols.js", "autobold.js", "color.js"]
   }
 });
 </script>
 <script type="text/javascript"
  src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
 </script>
-<!-- Fix slow MathJax rendering in IE8 -->
-<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7">
-
-
-<!-- newcommands_keep.tex -->
-$$
-\newcommand{\half}{\frac{1}{2}}
-\newcommand{\halfi}{{1/2}}
-\newcommand{\tp}{\thinspace .}
-$$
-
 
 
 
@@ -119,21 +108,21 @@ $$
       <li class="dropdown">
         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Contents <b class="caret"></b></a>
         <ul class="dropdown-menu">
-     <!-- navigation toc: "Mathematical model and solution method" --> <li><a href="#sec:math" style="font-size: 80%;"><b>Mathematical model and solution method</b></a></li>
-     <!-- navigation toc: "The wave equation problem" --> <li><a href="#sec:math:pde" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;The wave equation problem</a></li>
-     <!-- navigation toc: "Initial conditions" --> <li><a href="#sec:math:ic" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Initial conditions</a></li>
-     <!-- navigation toc: "Boundary conditions" --> <li><a href="#sec:math:bc" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Boundary conditions</a></li>
-     <!-- navigation toc: "Numerical solution method" --> <li><a href="#___sec9" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Numerical solution method</a></li>
-     <!-- navigation toc: "Demonstrations" --> <li><a href="#___sec10" style="font-size: 80%;"><b>Demonstrations</b></a></li>
-     <!-- navigation toc: "Dirichlet and Neumann conditions: reflecting and mirroring boundaries" --> <li><a href="#___sec11" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Dirichlet and Neumann conditions: reflecting and mirroring boundaries</a></li>
-     <!-- navigation toc: "Effect of impulsive start of waves" --> <li><a href="#___sec13" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Effect of impulsive start of waves</a></li>
-     <!-- navigation toc: "Feeding of waves from the boundary" --> <li><a href="#___sec14" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Feeding of waves from the boundary</a></li>
-     <!-- navigation toc: "Open and periodic boundary conditions" --> <li><a href="#___sec15" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Open and periodic boundary conditions</a></li>
-     <!-- navigation toc: "Appendix: Numerical solution method" --> <li><a href="#sec:app:numerical" style="font-size: 80%;"><b>Appendix: Numerical solution method</b></a></li>
-     <!-- navigation toc: "Approximating the wave equation" --> <li><a href="#___sec18" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Approximating the wave equation</a></li>
-     <!-- navigation toc: "Approximating the initial conditions" --> <li><a href="#___sec19" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Approximating the initial conditions</a></li>
-     <!-- navigation toc: "Approximation of boundary conditions" --> <li><a href="#___sec20" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Approximation of boundary conditions</a></li>
-     <!-- navigation toc: "Appendix: Computer code" --> <li><a href="#sec:app:code" style="font-size: 80%;"><b>Appendix: Computer code</b></a></li>
+     <!-- navigation toc: --> <li><a href="#sec:math" style="font-size: 80%;"><b>Mathematical model and solution method</b></a></li>
+     <!-- navigation toc: --> <li><a href="#sec:math:pde" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;The wave equation problem</a></li>
+     <!-- navigation toc: --> <li><a href="#sec:math:ic" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Initial conditions</a></li>
+     <!-- navigation toc: --> <li><a href="#sec:math:bc" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Boundary conditions</a></li>
+     <!-- navigation toc: --> <li><a href="#___sec9" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Numerical solution method</a></li>
+     <!-- navigation toc: --> <li><a href="._wavebc_cyborg003.html#___sec10" style="font-size: 80%;"><b>Demonstrations</b></a></li>
+     <!-- navigation toc: --> <li><a href="._wavebc_cyborg003.html#___sec11" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Dirichlet and Neumann conditions: reflecting and mirroring boundaries</a></li>
+     <!-- navigation toc: --> <li><a href="._wavebc_cyborg003.html#___sec13" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Effect of impulsive start of waves</a></li>
+     <!-- navigation toc: --> <li><a href="._wavebc_cyborg003.html#___sec14" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Feeding of waves from the boundary</a></li>
+     <!-- navigation toc: --> <li><a href="._wavebc_cyborg003.html#___sec15" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Open and periodic boundary conditions</a></li>
+     <!-- navigation toc: --> <li><a href="._wavebc_cyborg004.html#sec:app:numerical" style="font-size: 80%;"><b>Appendix: Numerical solution method</b></a></li>
+     <!-- navigation toc: --> <li><a href="._wavebc_cyborg004.html#___sec18" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Approximating the wave equation</a></li>
+     <!-- navigation toc: --> <li><a href="._wavebc_cyborg004.html#___sec19" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Approximating the initial conditions</a></li>
+     <!-- navigation toc: --> <li><a href="._wavebc_cyborg004.html#___sec20" style="font-size: 80%;">&nbsp;&nbsp;&nbsp;Approximation of boundary conditions</a></li>
+     <!-- navigation toc: --> <li><a href="._wavebc_cyborg005.html#sec:app:code" style="font-size: 80%;"><b>Appendix: Computer code</b></a></li>
 
         </ul>
       </li>
@@ -149,12 +138,12 @@ $$
 <a name="part0002"></a>
 <!-- !split -->
 
-<h1>Mathematical model and solution method <a name="sec:math"></a></h1>
+<h1 id="sec:math">Mathematical model and solution method<a name="sec:math"></a></h1>
 
 We solve a one-dimensional, linear, constant-coefficient
 wave equation by an explicit finite difference method.
 
-<h2>The wave equation problem <a name="sec:math:pde"></a></h2>
+<h2 id="sec:math:pde">The wave equation problem<a name="sec:math:pde"></a></h2>
 
 The standard, linear wave equation in a homogeneous one-dimensional
 medium reads
@@ -183,7 +172,7 @@ unique solution:
 </div>
 
 
-<h2>Initial conditions <a name="sec:math:ic"></a></h2>
+<h2 id="sec:math:ic">Initial conditions<a name="sec:math:ic"></a></h2>
 
 Most demonstrations will start with an initial profile of \( u \),
 
@@ -206,15 +195,15 @@ Two initial profiles will be considered:
 <p><img src="fig-wavebc/plug_Gaussian.png" align="bottom" width=800></p>
 </center>
 
-<h2>Boundary conditions <a name="sec:math:bc"></a></h2>
+<h2 id="sec:math:bc">Boundary conditions<a name="sec:math:bc"></a></h2>
 
-<h3>Fixed \( u \)  <a name="___sec4"></a></h3>
+<h3 id="___sec4">Fixed \( u \) <a name="___sec4"></a></h3>
 
 At \( x=0 \) we will sometimes use the condition \( u=0 \), often known as
 a homogeneous <em>Dirichlet</em> condition. This condition will
 mirror the wave.
 
-<h3>Reflecting condition  <a name="___sec5"></a></h3>
+<h3 id="___sec5">Reflecting condition <a name="___sec5"></a></h3>
 
 At \( x=0 \) and/or \( x=L \) we will apply a <em>reflecting</em> or <em>no-flux</em> condition:
 
@@ -229,7 +218,7 @@ hits a vertical wave, runs up to the double amplitude, and propagates
 back into the domain again. This type of boundary condition is also
 referred to as a <em>Neumann</em> condition.
 
-<h3>Feeding a wave from the boundary  <a name="___sec6"></a></h3>
+<h3 id="___sec6">Feeding a wave from the boundary <a name="___sec6"></a></h3>
 
 We shall demonstrate the effect of moving \( u \) at the boundary \( x=0 \) to
 feed the domain with an incoming wave. The boundary condition then reads
@@ -251,7 +240,7 @@ and \( T_3=[\frac{3}{2},\frac{11}{6}] \). The movement of \( u \) at the
 boundary will produce a wave that is by the PDE transported to
 the right into the domain.
 
-<h3>Open boundary condition  <a name="___sec7"></a></h3>
+<h3 id="___sec7">Open boundary condition <a name="___sec7"></a></h3>
 
 Very often one wants to let a wave travel through the boundary without
 being disturbed. Such a condition is called an <em>open</em> boundary condition,
@@ -269,7 +258,7 @@ $$
 These conditions work exactly in 1D, but are challenging to generalize
 and implement in 2D and 3D.
 
-<h3>Periodic boundary condition  <a name="___sec8"></a></h3>
+<h3 id="___sec8">Periodic boundary condition <a name="___sec8"></a></h3>
 
 When following a wave motion over large distances, it is desireable to
 let a wave travel out of the right domain
@@ -288,7 +277,7 @@ $$
 The condition at \( x=L \) is then an open boundary condition
 <a href="#mjx-eqn-4">(4)</a>.
 
-<h2>Numerical solution method  <a name="___sec9"></a></h2>
+<h2 id="___sec9">Numerical solution method <a name="___sec9"></a></h2>
 
 The wave equation is solved by an explicit finite difference method,
 which is of second-order in space and time. A uniform mesh with
@@ -303,15 +292,14 @@ Parts of the computer code are explained in
 
 <p>
 <p>
+<!-- navigation buttons at the bottom of the page -->
 <ul class="pager">
   <li class="previous">
     <a href="._wavebc_cyborg001.html">&larr; Prev</a>
   </li>
-
   <li class="next">
     <a href="._wavebc_cyborg003.html">Next &rarr;</a>
   </li>
-
 </ul>
 <!-- ------------------- end of main content --------------- -->
 

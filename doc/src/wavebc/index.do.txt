@@ -1,0 +1,15 @@
+<%
+dir = 'http://hplgit.github.io/wavebc/doc/pub'
+%>
+
+ * "DocOnce source code": "${dir}/wavebc.do.txt.html"
+ * "PDF for printing": "${dir}/wavebc_4print.pdf"
+ * "PDF for screen": "${dir}/wavebc.pdf"
+ * "HTML Sphinx CBC": "${dir}/sphinx-cbc/_build/html/._wavebc001.html"
+ * "HTML Sphinx FEniCS": "${dir}/sphinx-fenics_minimal/_built/html/._wavebc001.html"
+ * "HTML solarized": "${dir}/._wavebc_solarized002.html#sec:math:pde"
+ * "HTML Bootstrap v1": "${dir}/wavebc_journal.html"
+ * "HTML Bootstrap v2": "${dir}/wavebc_cyborg.html"
+ * "Viewable IPython notebook": "http://nbviewer.ipython.org/url/hplgit.github.io/wavebc/doc/pub/wavebc_4nbviewer.ipynb"
+ * "Ipython notebook v1": "${dir}/wavebc.ipynb" and "associated files": "${dir}/ipynb-wavebc-src.tar.gz" (both for download)
+ * "Ipython notebook v2": "${dir}/wavebc_video_encoding.ipynb" with "associated files": "${dir}/ipynb-wavebc-src.tar.gz" (both for download)

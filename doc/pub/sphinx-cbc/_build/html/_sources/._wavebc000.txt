@@ -8,10 +8,10 @@
 .. Consider if-else of blocks to create the small version.
 
 On the impact of boundary conditions in a wave equation
-=======================================================
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-:Author: Hans Petter Langtangen
-:Date: Jun 1, 2014
+:Authors: Hans Petter Langtangen
+:Date: Aug 25, 2014
 
 *Summary.* The purpose of this document is to demonstrate how
 different types of boundary conditions impacts the solution of
