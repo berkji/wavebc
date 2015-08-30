@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 #
 # On the impact of boundary conditions in a wave equation documentation build configuration file, created by
-# sphinx-quickstart on Mon Aug 25 11:10:19 2014.
+# sphinx-quickstart on Mon Sep  1 20:40:09 2014.
 #
 # This file is execfile()d with the current directory set to its
 # containing dir.

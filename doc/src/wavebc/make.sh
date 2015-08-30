@@ -23,7 +23,7 @@ mv -f wavebc.do.txt.html $dest
 themes="cbc fenics_minimal1"
 for theme in $themes; do
 system doconce format sphinx $name
-system doconce sphinx_dir author='H. P. Langtangen' theme=$theme dirname=sphinx-$theme $name
+system doconce sphinx_dir copyright='H. P. Langtangen' theme=$theme dirname=sphinx-$theme $name
 system doconce split_rst $name
 system python automake_sphinx.py
 mv -f sphinx-$theme $dest

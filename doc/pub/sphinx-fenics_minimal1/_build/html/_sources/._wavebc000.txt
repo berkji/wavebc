@@ -1,4 +1,4 @@
-.. Automatically generated Sphinx-extended reStructuredText file from Doconce source
+.. Automatically generated Sphinx-extended reStructuredText file from DocOnce source
    (https://github.com/hplgit/doconce/)
 
 .. 2DO: Use footnotes, links, citations
@@ -11,7 +11,7 @@ On the impact of boundary conditions in a wave equation
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 :Authors: Hans Petter Langtangen
-:Date: Aug 25, 2014
+:Date: Sep 1, 2014
 
 *Summary.* The purpose of this document is to demonstrate how
 different types of boundary conditions impacts the solution of
